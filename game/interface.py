@@ -1,21 +1,24 @@
-#import
+#IMPORT
 import pygame
 
 
-#class
+#CLASS
 
 
 
 
 
 
-#fonction
+#FONCTION
 
 
 
 
-#main
+#MAIN
+
 pygame.init()
+
+#générer la fenêtre de notre jeux 
 pygame.display.set_caption("Anger Snake")
 pygame.display.set_mode((960,540))
 
