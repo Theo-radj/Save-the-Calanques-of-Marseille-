@@ -1,18 +1,18 @@
 #IMPORT
 import pygame
 pygame.init()
-import time
+
 
 #CLASS
 class interface() :
-  def __init__(self, screen_size=(1080,720)) :
-    # générer la fenêtre de notre jeux 
+  def __init__(self, screen_size=(720,720)) :
+    # générer la fenêtre de notre jeux
     self.size = screen_size
     self.icon = pygame.image.load("asset\chevalier.png")
     pygame.display.set_icon(self.icon)
     pygame.display.set_caption("Anger Snake")
     self.ecran = pygame.display.set_mode(self.size)
-
+    self.surface_dessin = pygame.Surface((180, 150))
 
   def update_interface_ouvert(self) :
     running = True
@@ -21,26 +21,24 @@ class interface() :
     while running :
 
       for event in pygame.event.get() :
-        
+
         # verifier si le joueur ferme la fenêtre
         if event.type == pygame.QUIT:
           running = False
-          pygame.quit
-
-  def ecran_acceuil(self) :
-    taille_icone_reduit = int(self.size[1]/3)
-    self.icon = pygame.transform.scale(self.icon , (taille_icone_reduit,taille_icone_reduit))
-    # calcul pour centrer l'icone quelque soit la taille de la fenetre
-    r = self.icon.get_rect()
-    r.center = self.ecran.get_rect().center
+          pygame.quit()
 
 
-    # appliquer l'icone comme image d'accueil
-    self.ecran.blit(self.icon, r)
 
-    # mettre a jour l'ecran
-    pygame.display.flip()
+class perso() :
+    def __init__(self,grille, interface, ):
+        self.map = grille
+        self.perso = (10,10)
+        self.couleur = (0, 255, 0)
+        self.interface = interface
 
+    def affiche(self) :
+        print(self.interface.surface_dessin, self.couleur, self.perso)
+        pygame.draw.rect(self.interface.surface_dessin, self.couleur, self.perso)
 
 
 
@@ -53,9 +51,15 @@ class interface() :
 #MAIN
 if __name__ == "__main__":
   screen = interface()
-  screen.ecran_acceuil()
-  screen.update_interface_ouvert()
-  
+  grille = [[0,0,0,0],[0,0,0,1]]
+  personnage = perso(grille, screen)
+
+
+  while True :
+    screen.update_interface_ouvert()
+    personnage.affiche()
+    pygame.display.flip()
+
 
 
 
