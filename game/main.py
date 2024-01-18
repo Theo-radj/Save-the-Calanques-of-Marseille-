@@ -7,8 +7,8 @@ import random
 
 
 
-nb_x = 500
-nb_y = 500
+nb_x = 720
+nb_y = 720
 
 grille =  [[0 for y in range(nb_x)] for x in range(nb_y)]
 pos_joueur = (random.randint(0,nb_x),random.randint(0,nb_y))
@@ -55,25 +55,33 @@ class ennemi() :
     self.couleur = couleur
     self.interface = interface
     self.taille = random.randint(2,5)
-    self.serpent = [(3, 1), (2, 1), (1, 1)]
+
+    k,j = random.randint(3,72), random.randint(0,72)
+    self.serpent = [(k*10 , j*10), (k*10-10, j*10), (k*10-20, j*10)]
      
 
   def Serpent(self, direction) :
     for i in self.serpent :
       grille[i[0]][i[1]] = 1
+      print(i)
 
     tete = list(self.serpent[0])
 
     if direction == "HAUT":
       tete[1] -= 10
-    if direction == "BAS":
+    elif direction == "BAS":
       tete[1] += 10
-    if direction == "GAUCHE":
+    elif direction == "GAUCHE":
       tete[0] -= 10
-    if direction == "DROITE":
+    elif direction == "DROITE":
       tete[0] += 10
+    
+
+    if tete[0] < 0 or tete[1] < 0 :
+      pygame.quit()
 
     self.serpent.insert(0, tete)
+    grille[self.serpent[-1][0]][self.serpent[-1][0]] = 0
     self.serpent.pop()
 
     self.interface.ecran.fill((0,0,0))
@@ -82,25 +90,30 @@ class ennemi() :
       pygame.draw.rect(self.interface.ecran, self.couleur, (i[0], i[1],10,10))
     pygame.display.flip()
     
-
+    return direction
 
 
 #FONCTION
 def control(direction):
-    keys = pygame.key.get_pressed()
+  keys = pygame.key.get_pressed()
+  if keys:
     if keys[pygame.K_UP] and not direction == "BAS":
       direction = "HAUT"
+      direction = mechant1.Serpent(direction)
 
     elif keys[pygame.K_DOWN] and not direction == "HAUT":
       direction = "BAS"
+      direction = mechant1.Serpent(direction)
 
     elif keys[pygame.K_LEFT] and not direction == "DROITE":
       direction = "GAUCHE"
+      direction = mechant1.Serpent(direction)
 
     elif keys[pygame.K_RIGHT] and not direction == "GAUCHE":
       direction = "DROITE"
-
-    mechant1.Serpent(direction)
+      direction = mechant1.Serpent(direction)
+    
+  return direction
 
 
 #MAIN
