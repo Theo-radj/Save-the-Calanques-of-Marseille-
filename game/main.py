@@ -151,7 +151,7 @@ def gener_map():
   for x in range (3):
     for i in range(100):
       for j in range(100):
-        if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] ==2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] ==2:
+        if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] == 2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] == 2:
           chance = 600
           print("chanceux")
         else:
