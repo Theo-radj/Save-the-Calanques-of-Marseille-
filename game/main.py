@@ -12,7 +12,7 @@ nb_x = 45
 nb_y = 45
 
 
-pos_joueur = (random.randint(0,nb_x),random.randint(0,nb_y))
+pos_joueur = [random.randint(0,nb_x),random.randint(0,nb_y)]
 
 
 direction = "DROITE"
@@ -68,13 +68,14 @@ class perso() :
     self.joueur = joueur
     self.couleur = (0, 255, 0)
     grille[self.joueur[0]][self.joueur[1]] = 1
+
   def déplacement(self,direction):
     global grille
     grille[self.joueur[0]][self.joueur[1]] = 0
     if direction =="HAUT":
-      self.joueur[1] += 1
-    elif direction =="BAS":
       self.joueur[1] -= 1
+    elif direction =="BAS":
+      self.joueur[1] += 1
     elif direction =="GAUCHE":
       self.joueur[0] -= 1
     elif direction =="DROITE":
@@ -93,7 +94,7 @@ class ennemi() :
 
 
   def Serpent(self) :
-    global direction , grille
+    #global direction , grille
     for i in self.serpent :
       print(i)
       self.grille[i[0]][i[1]] = 1
@@ -126,38 +127,39 @@ class ennemi() :
 
 #FONCTION
 def control():
+  global direction
   keys = pygame.key.get_pressed()
   if keys:
     if keys[pygame.K_UP]:
-      perso.déplacement("HAUT")
+      personnage.déplacement("HAUT")
 
 
-    elif keys[pygame.K_DOWN] and not direction == "HAUT":
-      perso.déplacement("BAS")
+    elif keys[pygame.K_DOWN]:
+      personnage.déplacement("BAS")
 
 
-    elif keys[pygame.K_LEFT] and not direction == "DROITE":
-      perso.déplacement("GAUCHE")
+    elif keys[pygame.K_LEFT]:
+      personnage.déplacement("GAUCHE")
 
 
-    elif keys[pygame.K_RIGHT] and not direction == "GAUCHE":
-      perso.déplacement("DROITE")
+    elif keys[pygame.K_RIGHT]:
+      personnage.déplacement("DROITE")
 
 
 def gener_map():
-    map = [[0 for _ in range(100)] for _ in range(100)]
-    for x in range (3):
-        for i in range(100):
-            for j in range(100):
-                if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] ==2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] ==2:
-                    chance = 600
-                    print("chanceux")
-                else:
-                    chance = 998
-                    print("malchanceux")
-                if random.randint(0,1000) > chance:
-                    map[i][j] = 2
-    return map
+  map = [[0 for _ in range(100)] for _ in range(100)]
+  for x in range (3):
+    for i in range(100):
+      for j in range(100):
+        if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] ==2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] ==2:
+          chance = 600
+          print("chanceux")
+        else:
+          chance = 998
+          print("malchanceux")
+        if random.randint(0,1000) > chance:
+          map[i][j] = 2
+  return map
 
 
 #MAIN
