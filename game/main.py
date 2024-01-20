@@ -42,12 +42,14 @@ class interface() :
 
   def analyse_grille(self):
     global grille
+    #self.ecran.fill((0,0,0))
     for i in range(len(grille)):
       for j in range(len(grille[i])):
         if grille[i][j] == 2 :
           self.dessine_rocher(i,j)
-        if grille[i][j] == 1 :
+        elif grille[i][j] == 1 :
           self.dessine_perso(i,j)
+
 
 
   def dessine_serpent(self, serpent, couleur):
@@ -58,6 +60,7 @@ class interface() :
   def dessine_rocher(self, x,y):
     pygame.draw.rect(self.ecran, ((255,255,255)), (x*16, y*16,16,16))
     pygame.display.flip()
+
   def dessine_perso(self,x,y):
     pygame.draw.rect(self.ecran, ((0,255,0)), (x*16, y*16,16,16))
     pygame.display.flip()
@@ -153,10 +156,8 @@ def gener_map():
       for j in range(100):
         if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] == 2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] == 2:
           chance = 600
-          print("chanceux")
         else:
           chance = 998
-          print("malchanceux")
         if random.randint(0,1000) > chance:
           map[i][j] = 2
   return map
