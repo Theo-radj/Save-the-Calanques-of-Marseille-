@@ -26,23 +26,19 @@ def control():
 
   keys = pygame.key.get_pressed()
   if keys:
-    if keys[pygame.K_UP]:
-        if grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2:
+    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2:
             grille = personnage.déplacement("HAUT",grille)
 
 
-    elif keys[pygame.K_DOWN]:
-        if grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2:
+    elif keys[pygame.K_DOWN] and grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2:
             grille = personnage.déplacement("BAS",grille)
 
 
-    elif keys[pygame.K_LEFT]:
-        if grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2:
+    elif keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2:
             grille = personnage.déplacement("GAUCHE",grille)
 
 
-    elif keys[pygame.K_RIGHT]:
-        if grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2:
+    elif keys[pygame.K_RIGHT] and grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2:
             grille = personnage.déplacement("DROITE",grille)
   print(personnage.joueur)
 
