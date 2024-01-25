@@ -1,13 +1,13 @@
-#IMPORT
+ #IMPORT
 import pygame
 pygame.init()
 
 import sys
 import random
 
-from hero import*
-from interface import*
-from snake import*
+from hero import *
+from interface import *
+from snake import *
 
 
 
@@ -26,20 +26,20 @@ def control():
 
   keys = pygame.key.get_pressed()
   if keys:
-    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2:
-            grille = personnage.déplacement("HAUT",grille)
+    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2 and personnage.joueur[1]-1 != -1 :
+      grille = personnage.déplacement("HAUT",grille)
 
 
-    elif keys[pygame.K_DOWN] and grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2:
-            grille = personnage.déplacement("BAS",grille)
+    elif keys[pygame.K_DOWN] and grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2 and personnage.joueur[1]+1 != -1:
+      grille = personnage.déplacement("BAS",grille)
 
 
-    elif keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2:
-            grille = personnage.déplacement("GAUCHE",grille)
+    elif keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2 and personnage.joueur[0]-1 != -1:
+      grille = personnage.déplacement("GAUCHE",grille)
 
 
-    elif keys[pygame.K_RIGHT] and grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2:
-            grille = personnage.déplacement("DROITE",grille)
+    elif keys[pygame.K_RIGHT] and grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2 and personnage.joueur[0]+1 != -1:
+      grille = personnage.déplacement("DROITE",grille)
   print(personnage.joueur)
 
 def gener_map():
