@@ -1,4 +1,4 @@
- #IMPORT
+#IMPORT
 import pygame
 pygame.init()
 
@@ -9,15 +9,10 @@ from hero import *
 from interface import *
 from snake import *
 
-
-
 nb_x = 45
 nb_y = 45
 
-
 pos_joueur = [random.randint(0,nb_x),random.randint(0,nb_y)]
-
-
 
 #FONCTION
 def control():
