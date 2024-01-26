@@ -40,7 +40,6 @@ def control():
 
     elif keys[pygame.K_RIGHT] and grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2 and personnage.joueur[0]+1 != -1:
       grille = personnage.déplacement("DROITE",grille)
-  print(personnage.joueur)
 
 def gener_map():
   map = [[0 for _ in range(100)] for _ in range(100)]
