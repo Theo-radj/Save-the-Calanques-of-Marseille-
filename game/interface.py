@@ -32,7 +32,9 @@ class interface() :
             self.dessine_perso(i,j)
     pygame.display.flip()
 
-
+  def camera(self) :
+    
+    pass
 
 
   def dessine_serpent(self, serpent, couleur):
