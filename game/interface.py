@@ -60,11 +60,8 @@ class interface() :
     else:
       self.camera_y = y - personnage.joueur[1] + self.centre_y
 
-
-
-
-
     return self.camera_x, self.camera_y
+
 
   def deplace_camera(self, vitesse) :
     self.centre_x += vitesse[0]
