@@ -1,7 +1,9 @@
-﻿
+﻿import random
+
 class perso() :
-  def __init__(self, joueur,map):
-    self.joueur = joueur
+  def __init__(self, nb,map):
+
+    self.joueur = [random.randint(0,nb),random.randint(0,nb)]
     self.couleur = (0, 255, 0)
     map[self.joueur[0]][self.joueur[1]] = 1
 

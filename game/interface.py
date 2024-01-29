@@ -1,8 +1,8 @@
 import pygame
-
+pygame.init()
 
 class interface() :
-  def __init__(self, screen_size=(720,720)) :
+  def __init__(self, grille, personnage, screen_size=(720,720)) :
     # générer la fenêtre de notre jeux
     self.size = screen_size
     self.icon = pygame.image.load("asset\chevalier.png")
@@ -10,14 +10,15 @@ class interface() :
     pygame.display.set_caption("Anger Snake")
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
-    self.tiles = 16
+    self.grille = grille
+    self.personnage = personnage
+    self.tiles = 20
     self.nb_tile_x = self.size[0]//self.tiles
     self.nb_tile_y = self.size[1]//self.tiles
     self.centre_x = int((self.nb_tile_x)//2)
     self.centre_y = int((self.nb_tile_y)//2)
-    self.max_horizontal_centre = 0
-    self.max_vertical_centre = 0
-
+    self.max_horizontal_centre = len(self.grille) - self.centre_x
+    self.max_vertical_centre = len(self.grille[0]) - self.centre_y
 
   def update_interface_ouvert(self) :
     # boucle permettant de rester la fenetre allumé
@@ -30,33 +31,30 @@ class interface() :
           sys.exit()
       return True
 
-  def analyse_grille(self, grille, personnage):
+  def analyse_grille(self):
     self.ecran.fill((0,0,0))
-    for i in range(len(grille)):
-      for j in range(len(grille[i])):
-        x,y = self.camera_perso(personnage, grille, i, j)
-        if grille[i][j] == 2 :
+    for i in range(len(self.grille)):
+      for j in range(len(self.grille[i])):
+        x,y = self.camera_perso(self.personnage, i, j)
+        if self.grille[i][j] == 2 :
           self.dessine_rocher(x,y)
-        elif grille[i][j] == 1:
-          
+        elif self.grille[i][j] == 1:
           self.dessine_perso(x,y)
     pygame.display.flip()
 
-  def camera_perso(self, personnage, grille, x, y) :
-    max_horizontal_centre = len(grille) - self.centre_x
-    max_vertical_centre = len(grille[0]) - self.centre_y
+  def camera_perso(self, personnage, x, y) :
 
     if personnage.joueur[0] < self.centre_x :
       self.camera_x = x
-    elif  personnage.joueur[0] > max_horizontal_centre :
-      self.camera_x = self.centre_x + x - max_horizontal_centre
+    elif  personnage.joueur[0] > self.max_horizontal_centre :
+      self.camera_x = self.centre_x + x - self.max_horizontal_centre
     else:
       self.camera_x = x - personnage.joueur[0] + self.centre_x
 
     if personnage.joueur[1] < self.centre_y :
       self.camera_y = y
-    elif  personnage.joueur[1] > max_vertical_centre :
-      self.camera_y = self.centre_y + y - max_vertical_centre 
+    elif  personnage.joueur[1] > self.max_vertical_centre :
+      self.camera_y = self.centre_y + y - self.max_vertical_centre 
     else:
       self.camera_y = y - personnage.joueur[1] + self.centre_y
 
@@ -66,7 +64,6 @@ class interface() :
   def deplace_camera(self, vitesse) :
     self.centre_x += vitesse[0]
     self.centre_y += vitesse[1]
-
 
   def dessine_serpent(self, serpent, couleur):
     for i in serpent :

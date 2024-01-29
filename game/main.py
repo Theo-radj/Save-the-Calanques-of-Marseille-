@@ -1,18 +1,11 @@
 #IMPORT
-import pygame
-pygame.init()
-
 import sys
-import random
+
 
 from hero import *
 from interface import *
 from snake import *
 
-nb_x = 45
-nb_y = 45
-
-pos_joueur = [random.randint(0,nb_x),random.randint(0,nb_y)]
 
 #FONCTION
 def control():
@@ -38,8 +31,7 @@ def control():
 
 
 
-def gener_map():
-  k = 100
+def gener_map(k):
   map = [[0 for _ in range(k)] for _ in range(k)]
   for x in range (3):
     for i in range(k):
@@ -55,17 +47,18 @@ def gener_map():
 
 #MAIN
 if __name__ == "__main__":
-  grille = gener_map()
-  inter = interface()
+  Taille_map = 100
+  grille = gener_map(Taille_map)
   #mechant1 = ennemi((0,255,0),inter)
-  personnage = perso(pos_joueur,grille)
+  personnage = perso(Taille_map,grille)
+  inter = interface(grille, personnage)
   clock = pygame.time.Clock()
   run = True
   i = 0
   while run :
     run = inter.update_interface_ouvert()
     control()
-    inter.analyse_grille(grille, personnage)
+    inter.analyse_grille()
     clock.tick(30)
     #if clock.get_fps() > 700 :
       #print(clock.get_fps())

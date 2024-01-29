@@ -1,4 +1,7 @@
-﻿class ennemi() :
+﻿import random
+import pygame
+
+class ennemi() :
   def __init__(self, couleur, interface, grille):
     self.couleur = couleur
     self.interface = interface
@@ -14,7 +17,7 @@
     for i in self.serpent :
       print(i)
       self.grille[i[0]][i[1]] = 1
-    print(grille)
+    print(self.grille)
 
     tete = list(self.serpent[0])
 
@@ -32,7 +35,7 @@
       pygame.quit()
 
     self.serpent.insert(0, tete)
-    grille[self.serpent[-1][0]][self.serpent[-1][0]] = 0
+    self.grille[self.serpent[-1][0]][self.serpent[-1][0]] = 0
     self.serpent.pop()
 
     self.interface.ecran.fill((0,0,0))
