@@ -20,28 +20,31 @@ def control():
   global grille
 
   keys = pygame.key.get_pressed()
+
   if keys:
-    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2 and personnage.joueur[1]-1 != -1 :
-      grille = personnage.déplacement("HAUT",grille)
+    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] != 2 and personnage.joueur[1]-1 != -1:
+      grille = personnage.déplacement("HAUT", grille)
+
+    if keys[pygame.K_DOWN] and personnage.joueur[1]+1 <= len(grille)-1:
+      if grille[personnage.joueur[0]][personnage.joueur[1]+1] != 2:
+        grille = personnage.déplacement("BAS", grille)
+
+    if keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] != 2 and personnage.joueur[0]-1 != -1:
+      grille = personnage.déplacement("GAUCHE", grille)
+
+    if keys[pygame.K_RIGHT] and personnage.joueur[0]+1 <= len(grille[0])-1:
+      if grille[personnage.joueur[0]+1][personnage.joueur[1]] != 2:
+        grille = personnage.déplacement("DROITE", grille)
 
 
-    elif keys[pygame.K_DOWN] and grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2 and personnage.joueur[1]+1 != -1:
-      grille = personnage.déplacement("BAS",grille)
-
-
-    elif keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2 and personnage.joueur[0]-1 != -1:
-      grille = personnage.déplacement("GAUCHE",grille)
-
-
-    elif keys[pygame.K_RIGHT] and grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2 and personnage.joueur[0]+1 != -1:
-      grille = personnage.déplacement("DROITE",grille)
 
 def gener_map():
-  map = [[0 for _ in range(100)] for _ in range(100)]
+  k = 100
+  map = [[0 for _ in range(k)] for _ in range(k)]
   for x in range (3):
-    for i in range(100):
-      for j in range(100):
-        if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] == 2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] == 2:
+    for i in range(k):
+      for j in range(k):
+        if map[(i+1)%k][(j+1)%k] == 2 or map[(i+1)%k][j] == 2 or map[i][(j+1)%k] == 2 or map[(i-1)%k][j] == 2 or map[(i-1)%k][(j-1)%k] or map[i][(j-1)%k] == 2:
           chance = 600
         else:
           chance = 998
@@ -58,10 +61,13 @@ if __name__ == "__main__":
   personnage = perso(pos_joueur,grille)
   clock = pygame.time.Clock()
   run = True
-
+  i = 0
   while run :
     run = inter.update_interface_ouvert()
     control()
-    inter.analyse_grille(grille)
+    inter.analyse_grille(grille, personnage)
     clock.tick(30)
+    #if clock.get_fps() > 700 :
+      #print(clock.get_fps())
+
 
