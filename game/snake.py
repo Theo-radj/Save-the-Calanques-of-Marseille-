@@ -12,7 +12,7 @@ class ennemi() :
     self.serpent = [(k*10 , j*10), (k*10-10, j*10), (k*10-20, j*10)]
 
 
-  def Serpent(self) :
+  def Serpent(self, direction) :
     #global direction , grille
     for i in self.serpent :
       print(i)

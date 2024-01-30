@@ -32,34 +32,37 @@ class interface() :
       return True
 
   def analyse_grille(self):
+    #cette fonction a chaque itération permet  d'analyser les cases de la grille 
+    #et d'appeler les bonnes fonctions pour afficher ce qu'il y a à ces endroits
     self.ecran.fill((0,0,0))
     for i in range(len(self.grille)):
       for j in range(len(self.grille[i])):
-        x,y = self.camera_perso(self.personnage, i, j)
+        x,y = self.camera_perso(i, j)
         if self.grille[i][j] == 2 :
           self.dessine_rocher(x,y)
         elif self.grille[i][j] == 1:
           self.dessine_perso(x,y)
     pygame.display.flip()
 
-  def camera_perso(self, personnage, x, y) :
-
-    if personnage.joueur[0] < self.centre_x :
+  def camera_perso(self, x, y) :
+    #cette fontion permet de savoir si on centre le joueur au milieu 
+    #de l'ecran ou pas  et ainsi cela permettrai au joueur d'etre
+    #en haut a droite s'il est au bout de la map au lieu du milieu
+    if self.personnage.joueur[0] < self.centre_x :
       self.camera_x = x
-    elif  personnage.joueur[0] > self.max_horizontal_centre :
+    elif  self.personnage.joueur[0] > self.max_horizontal_centre :
       self.camera_x = self.centre_x + x - self.max_horizontal_centre
     else:
-      self.camera_x = x - personnage.joueur[0] + self.centre_x
+      self.camera_x = x - self.personnage.joueur[0] + self.centre_x
 
-    if personnage.joueur[1] < self.centre_y :
+    if self.personnage.joueur[1] < self.centre_y :
       self.camera_y = y
-    elif  personnage.joueur[1] > self.max_vertical_centre :
+    elif  self.personnage.joueur[1] > self.max_vertical_centre :
       self.camera_y = self.centre_y + y - self.max_vertical_centre 
     else:
-      self.camera_y = y - personnage.joueur[1] + self.centre_y
+      self.camera_y = y - self.personnage.joueur[1] + self.centre_y
 
     return self.camera_x, self.camera_y
-
 
   def deplace_camera(self, vitesse) :
     self.centre_x += vitesse[0]
