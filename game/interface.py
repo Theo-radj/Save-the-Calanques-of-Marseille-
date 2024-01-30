@@ -38,9 +38,12 @@ class interface() :
     for i in range(len(self.grille)):
       for j in range(len(self.grille[i])):
         x,y = self.camera_perso(i, j)
-        if self.grille[i][j] == 2 :
-          self.dessine_rocher(x,y)
-        elif self.grille[i][j] == 1:
+        affiche = self.grille[i][j]
+
+        if affiche <= 20 and affiche >= 10 :
+          self.dessine_rocher(x,y, affiche)
+
+        elif affiche == 1:
           self.dessine_perso(x,y)
     pygame.display.flip()
 
@@ -73,8 +76,9 @@ class interface() :
       pygame.draw.rect(self.ecran, couleur, (i[0], i[1],self.tiles,self.tiles))
     pygame.display.flip()
 
-  def dessine_rocher(self, x,y):
-    pygame.draw.rect(self.ecran, ((255,255,255)), (x*self.tiles, y*self.tiles,self.tiles,self.tiles))
+  def dessine_rocher(self, x,y, taux):
+    couleur = int(255*taux/20)
+    pygame.draw.rect(self.ecran, (couleur,couleur,couleur), (x*self.tiles, y*self.tiles,self.tiles,self.tiles))
 
 
   def dessine_perso(self,x,y):

@@ -15,31 +15,33 @@ def control():
   keys = pygame.key.get_pressed()
 
   if keys:
-    if keys[pygame.K_UP] :
+    if keys[pygame.K_UP] or keys[pygame.K_z]:
       personnage.direction = "HAUT"
-      if grille[personnage.joueur[0]][personnage.joueur[1]-1] != 2 and personnage.joueur[1]-1 != -1:
+      if grille[personnage.joueur[0]][personnage.joueur[1]-1] == 0 and personnage.joueur[1]-1 != -1:
         personnage.déplacement("HAUT", grille)
 
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
       personnage.direction = "BAS"
       if personnage.joueur[1]+1 <= len(grille)-1:
-        if grille[personnage.joueur[0]][personnage.joueur[1]+1] != 2:
+        if grille[personnage.joueur[0]][personnage.joueur[1]+1] == 0:
           personnage.déplacement("BAS", grille)
 
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] or keys[pygame.K_q]:
       personnage.direction =  "GAUCHE"
-      if grille[personnage.joueur[0]-1][personnage.joueur[1]] != 2 and personnage.joueur[0]-1 != -1:
+      if grille[personnage.joueur[0]-1][personnage.joueur[1]] == 0 and personnage.joueur[0]-1 != -1:
         personnage.déplacement("GAUCHE", grille)
 
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] or  keys[pygame.K_d]:
       personnage.direction = "DROITE"
       if personnage.joueur[0]+1 <= len(grille[0])-1:
-        if grille[personnage.joueur[0]+1][personnage.joueur[1]] != 2:
+        if grille[personnage.joueur[0]+1][personnage.joueur[1]] == 0:
           personnage.déplacement("DROITE", grille)
 
 
     if pygame.mouse.get_pressed()[0] :
-      personnage.casser_pierre(grille)
+      delay = personnage.casser_pierre(grille)
+      if delay:
+        pygame.time.delay(400)
 
 
 
@@ -50,12 +52,12 @@ def gener_map(k):
   for x in range (3):
     for i in range(k):
       for j in range(k):
-        if my_map[(i+1)%k][(j+1)%k] == 2 or my_map[(i+1)%k][j] == 2 or my_map[i][(j+1)%k] == 2 or my_map[(i-1)%k][j] == 2 or my_map[(i-1)%k][(j-1)%k] or my_map[i][(j-1)%k] == 2:
+        if my_map[(i+1)%k][(j+1)%k] == 20 or my_map[(i+1)%k][j] == 20 or my_map[i][(j+1)%k] == 20 or my_map[(i-1)%k][j] == 20 or my_map[(i-1)%k][(j-1)%k] or my_map[i][(j-1)%k] == 20:
           chance = 600
         else:
           chance = 998
         if random.randint(0,1000) > chance:
-          my_map[i][j] = 2
+          my_map[i][j] = 20
   return my_map
 
 
