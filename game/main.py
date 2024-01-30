@@ -15,19 +15,32 @@ def control():
   keys = pygame.key.get_pressed()
 
   if keys:
-    if keys[pygame.K_UP] and grille[personnage.joueur[0]][personnage.joueur[1]-1] != 2 and personnage.joueur[1]-1 != -1:
-      grille = personnage.déplacement("HAUT", grille)
+    if keys[pygame.K_UP] :
+      personnage.direction = "HAUT"
+      if grille[personnage.joueur[0]][personnage.joueur[1]-1] != 2 and personnage.joueur[1]-1 != -1:
+        personnage.déplacement("HAUT", grille)
 
-    if keys[pygame.K_DOWN] and personnage.joueur[1]+1 <= len(grille)-1:
-      if grille[personnage.joueur[0]][personnage.joueur[1]+1] != 2:
-        grille = personnage.déplacement("BAS", grille)
+    if keys[pygame.K_DOWN]:
+      personnage.direction = "BAS"
+      if personnage.joueur[1]+1 <= len(grille)-1:
+        if grille[personnage.joueur[0]][personnage.joueur[1]+1] != 2:
+          personnage.déplacement("BAS", grille)
 
-    if keys[pygame.K_LEFT] and grille[personnage.joueur[0]-1][personnage.joueur[1]] != 2 and personnage.joueur[0]-1 != -1:
-      grille = personnage.déplacement("GAUCHE", grille)
+    if keys[pygame.K_LEFT]:
+      personnage.direction =  "GAUCHE"
+      if grille[personnage.joueur[0]-1][personnage.joueur[1]] != 2 and personnage.joueur[0]-1 != -1:
+        personnage.déplacement("GAUCHE", grille)
 
-    if keys[pygame.K_RIGHT] and personnage.joueur[0]+1 <= len(grille[0])-1:
-      if grille[personnage.joueur[0]+1][personnage.joueur[1]] != 2:
-        grille = personnage.déplacement("DROITE", grille)
+    if keys[pygame.K_RIGHT]:
+      personnage.direction = "DROITE"
+      if personnage.joueur[0]+1 <= len(grille[0])-1:
+        if grille[personnage.joueur[0]+1][personnage.joueur[1]] != 2:
+          personnage.déplacement("DROITE", grille)
+
+
+    if pygame.mouse.get_pressed()[0] :
+      personnage.casser_pierre(grille)
+
 
 
 
@@ -37,7 +50,7 @@ def gener_map(k):
   for x in range (3):
     for i in range(k):
       for j in range(k):
-        if my_map[(i+1)%k][(j+1)%k] == 2 or my_map[(i+1)%k][j] == 2 or my_map[i][(j+1)%k] == 2 or my_map[(i-1)%k][j] == 2 or my_map[(i-1)%k][(j-1)%k] == 2 or my_map[i][(j-1)%k] == 2:
+        if my_map[(i+1)%k][(j+1)%k] == 2 or my_map[(i+1)%k][j] == 2 or my_map[i][(j+1)%k] == 2 or my_map[(i-1)%k][j] == 2 or my_map[(i-1)%k][(j-1)%k] or my_map[i][(j-1)%k] == 2:
           chance = 600
         else:
           chance = 998
@@ -60,7 +73,7 @@ if __name__ == "__main__":
     run = inter.update_interface_ouvert()
     control()
     inter.analyse_grille()
-    clock.tick(30)
+    clock.tick(22)
     #if i ==  100:
     #  print(clock.get_fps())
     #  i= 0
