@@ -2,7 +2,7 @@
 
 class perso() :
   def __init__(self, nb,map):
-    self.joueur = [random.randint(0,nb),random.randint(0,nb)]
+    self.joueur = [random.randint(0,nb -1 ),random.randint(0,nb - 1)]
     self.couleur = (0, 255, 0)
     print(self.joueur)
     map[self.joueur[0]][self.joueur[1]] = 1
