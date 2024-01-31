@@ -1,5 +1,6 @@
 ﻿import random
 from hero import*
+
 class Snake() :
   def __init__(self, map,personnage):
     self.perso = personnage
@@ -42,7 +43,6 @@ class Snake() :
     while direction == " ":
       if len(dist_list)==0:
         direction == "NUL"
-        print("ok")
         break
       else:
         L= []
@@ -54,26 +54,25 @@ class Snake() :
 
         dist = L[random.randint(0,len(L)-1)]
         if dist == dist_droite:
-          if map[self.position[0][0]+1 ][self.position[0][1]] !=2 and (self.position[0][0]+1 ,self.position[0][1]) != (self.position[1][0] ,self.position[1][1]):
+          if map[self.position[0][0]+1 ][self.position[0][1]] < 10 and (self.position[0][0]+1 ,self.position[0][1]) != (self.position[1][0] ,self.position[1][1]):
             direction = "DROITE"
           else:
             dist_list.remove(dist_droite)
         elif dist == dist_gauche:
-          if map[self.position[0][0]-1 ][self.position[0][1]] !=2 and (self.position[0][0]-1 ,self.position[0][1]) != (self.position[1][0] ,self.position[1][1]):
+          if map[self.position[0][0]-1 ][self.position[0][1]] < 10 and (self.position[0][0]-1 ,self.position[0][1]) != (self.position[1][0] ,self.position[1][1]):
             direction = "GAUCHE"
           else:
             dist_list.remove(dist_gauche)
         elif dist == dist_bas:
-          if map[self.position[0][0] ][self.position[0][1]+1] !=2 and (self.position[0][0] ,self.position[0][1]+1) != (self.position[1][0] ,self.position[1][1]):
+          if map[self.position[0][0] ][self.position[0][1]+1] < 10 and (self.position[0][0] ,self.position[0][1]+1) != (self.position[1][0] ,self.position[1][1]):
             direction = "BAS"
           else:
             dist_list.remove(dist_bas)
         elif dist == dist_haut:
-          if map[self.position[0][0] ][self.position[0][1]-1] !=2 and (self.position[0][0] ,self.position[0][1]-1) != (self.position[1][0] ,self.position[1][1]):
+          if map[self.position[0][0] ][self.position[0][1]-1] < 10 and (self.position[0][0] ,self.position[0][1]-1) != (self.position[1][0] ,self.position[1][1]):
             direction = "HAUT"
           else:
             dist_list.remove(dist_haut)
-    print(direction)
     self.deplacement(map,direction)
 
 

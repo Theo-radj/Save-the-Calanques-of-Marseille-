@@ -1,87 +1,88 @@
 #IMPORT
-import pygame
-pygame.init()
-
 import sys
-import random
-
-from hero import*
-from interface import*
-from snake import*
 
 
-
-nb_x = 45
-nb_y = 45
-
-
-pos_joueur = [random.randint(0,nb_x),random.randint(0,nb_y)]
-
+from hero import *
+from interface import *
+from snake import *
 
 
 #FONCTION
 def control(c):
   global personnage
   global grille
-  print(personnage.joueur,"perso")
-  print(serpent.position[0],"serpent")
 
   keys = pygame.key.get_pressed()
+
   if keys:
-    if keys[pygame.K_UP]:
-        if grille[personnage.joueur[0]][personnage.joueur[1]-1] !=2:
-            personnage.déplacement("HAUT",grille)
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+      personnage.direction = "HAUT"
+      if grille[personnage.joueur[0]][personnage.joueur[1]-1] == 0 and personnage.joueur[1]-1 != -1:
+        personnage.déplacement("HAUT", grille)
+
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+      personnage.direction = "BAS"
+      if personnage.joueur[1]+1 <= len(grille)-1:
+        if grille[personnage.joueur[0]][personnage.joueur[1]+1] == 0:
+          personnage.déplacement("BAS", grille)
+
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+      personnage.direction =  "GAUCHE"
+      if grille[personnage.joueur[0]-1][personnage.joueur[1]] == 0 and personnage.joueur[0]-1 != -1:
+        personnage.déplacement("GAUCHE", grille)
+
+    if keys[pygame.K_RIGHT] or  keys[pygame.K_d]:
+      personnage.direction = "DROITE"
+      if personnage.joueur[0]+1 <= len(grille[0])-1:
+        if grille[personnage.joueur[0]+1][personnage.joueur[1]] == 0:
+          personnage.déplacement("DROITE", grille)
 
 
-    elif keys[pygame.K_DOWN]:
-        if grille[personnage.joueur[0]][personnage.joueur[1]+1] !=2:
-             personnage.déplacement("BAS",grille)
+    if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
+      personnage.casser_pierre(grille)
 
-
-    elif keys[pygame.K_LEFT]:
-        if grille[personnage.joueur[0]-1][personnage.joueur[1]] !=2:
-            personnage.déplacement("GAUCHE",grille)
-
-
-    elif keys[pygame.K_RIGHT]:
-        if grille[personnage.joueur[0]+1][personnage.joueur[1]] !=2:
-            personnage.déplacement("DROITE",grille)
-  if (c%2) == 0:
-    serpent.recherche_perso(grille)
-  clock.tick(30)
+    if (c%2) == 0:
+        serpent.recherche_perso(grille)
 
 
 
-
-
-def gener_map():
-  map = [[0 for _ in range(100)] for _ in range(100)]
+def gener_map(k):
+  my_map = [[0 for _ in range(k)] for _ in range(k)]
   for x in range (3):
-    for i in range(100):
-      for j in range(100):
-        if map[(i+1)%100][(j+1)%100] == 2 or map[(i+1)%100][j] == 2 or map[i][(j+1)%100] == 2 or map[(i-1)%100][j] == 2 or map[(i-1)%100][(j-1)%100] or map[i][(j-1)%100] == 2:
+    for i in range(k):
+      for j in range(k):
+        if my_map[(i+1)%k][(j+1)%k] == 20 or my_map[(i+1)%k][j] == 20 or my_map[i][(j+1)%k] == 20 or my_map[(i-1)%k][j] == 20 or my_map[(i-1)%k][(j-1)%k] or my_map[i][(j-1)%k] == 20:
           chance = 600
         else:
           chance = 998
         if random.randint(0,1000) > chance:
-          map[i][j] = 2
-  return map
+          my_map[i][j] = 20
+  return my_map
 
 
 #MAIN
 if __name__ == "__main__":
-  grille = gener_map()
-  inter = interface()
-  #mechant1 = ennemi((0,255,0),inter)
-  personnage = perso(pos_joueur,grille)
+  Taille_map = 100
+  grille = gener_map(Taille_map)
+  personnage = perso(Taille_map,grille)
   serpent = Snake(grille,personnage)
+  inter = interface(grille, personnage)
   clock = pygame.time.Clock()
   run = True
-  c=0
+  compteur = 0
   while run :
-    c = c+1
     run = inter.update_interface_ouvert()
-    control(c)
-    inter.analyse_grille(grille)
-    clock.tick(30)
+    control(compteur)
+    compteur = compteur + 1
+    inter.analyse_grille()
+    clock.tick(22)
+
+
+
+    #if i ==  100:
+    #  print(clock.get_fps())
+    #  i= 0
+    #else:
+    #  i = i +  1
+
 
