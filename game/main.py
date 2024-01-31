@@ -38,11 +38,11 @@ def control(c):
           personnage.déplacement("DROITE", grille)
 
 
-    if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
-      personnage.casser_pierre(grille)
+  if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
+    personnage.casser_pierre(grille)
 
-    if (c%3) == 0:
-        serpent.recherche_perso(grille)
+  if (c%3) == 0:
+    serpent.recherche_perso(grille)
 
 
 
