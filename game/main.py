@@ -41,7 +41,7 @@ def control(c):
     if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
       personnage.casser_pierre(grille)
 
-    if (c%2) == 0:
+    if (c%3) == 0:
         serpent.recherche_perso(grille)
 
 

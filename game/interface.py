@@ -12,7 +12,7 @@ class interface() :
     self.surface_dessin = pygame.Surface((180, 150))
     self.grille = grille
     self.personnage = personnage
-    self.taille_tiles = 40
+    self.taille_tiles = 25
     self.nb_tile_x = self.size[0]//self.taille_tiles
     self.nb_tile_y = self.size[1]//self.taille_tiles
     self.centre_x = int((self.nb_tile_x)//2)
@@ -25,7 +25,6 @@ class interface() :
       for event in pygame.event.get() :
         # verifier si le joueur ferme la fenêtre
         if event.type == pygame.QUIT:
-
           pygame.quit()
           return False
           sys.exit()
