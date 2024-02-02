@@ -2,8 +2,9 @@
 from hero import*
 
 class Snake() :
-  def __init__(self, map,personnage):
+  def __init__(self, map, personnage, inter):
     self.perso = personnage
+    self.inter = inter
     self.taille = 5
     self.position = []
     self.position.append((random.randint(self.taille,45), random.randint(0,45)))
@@ -27,6 +28,9 @@ class Snake() :
 
     self.position.insert(0, new_tete)
     self.position.pop()
+    if map[self.position[0][0]][self.position[0][1]] == 1:
+      self.inter.fin_de_jeu()
+
     map[self.position[-1][0]][self.position[-1][1]] = 0
     map[self.position[0][0]][self.position[0][1]] = 3
 

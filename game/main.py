@@ -8,12 +8,15 @@ from snake import *
 
 
 #FONCTION
-def control(c):
+def control():
   global personnage
   global grille
+  global inter
+  global compteur
+
 
   keys = pygame.key.get_pressed()
-
+ 
   if keys:
     if keys[pygame.K_UP] or keys[pygame.K_w]:
       personnage.direction = "HAUT"
@@ -37,11 +40,11 @@ def control(c):
         if grille[personnage.joueur[0]+1][personnage.joueur[1]] == 0:
           personnage.déplacement("DROITE", grille)
 
-
   if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
     personnage.casser_pierre(grille)
 
-  if (c%3) == 0:
+  compteur = compteur + 1 
+  if (compteur%3) == 0:
     serpent.recherche_perso(grille)
 
 
@@ -62,27 +65,27 @@ def gener_map(k):
 
 #MAIN
 if __name__ == "__main__":
-  Taille_map = 100
-  grille = gener_map(Taille_map)
-  personnage = perso(Taille_map,grille)
-  serpent = Snake(grille,personnage)
-  inter = interface(grille, personnage)
-  clock = pygame.time.Clock()
-  run = True
-  compteur = 0
-  while run :
-    run = inter.update_interface_ouvert()
-    control(compteur)
-    compteur = compteur + 1
-    inter.analyse_grille()
-    clock.tick(22)
+  while True:
+    Taille_map = 100
+    grille = gener_map(Taille_map)
+    personnage = perso(Taille_map,grille)
+    inter = interface(grille, personnage)
+    serpent = Snake(grille,personnage, inter)
+    clock = pygame.time.Clock()
+    run = True
+    compteur = 0
+    while inter.jeu :
+      inter.update_interface_ouvert()
+      control()
+      inter.analyse_grille()
+      clock.tick(22)
 
 
 
-    #if i ==  100:
-    #  print(clock.get_fps())
-    #  i= 0
-    #else:
-    #  i = i +  1
+      #if i ==  100:
+      #  print(clock.get_fps())
+      #  i= 0
+      #else:
+      #  i = i +  1
 
 

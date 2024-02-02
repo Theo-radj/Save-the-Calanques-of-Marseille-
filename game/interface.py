@@ -1,12 +1,14 @@
 import pygame
 pygame.init()
+import sys
 
 class interface() :
   def __init__(self, grille, personnage, screen_size=(720,720)) :
     # générer la fenêtre de notre jeux
     self.size = screen_size
-    self.icon = pygame.image.load("asset\chevalier.png")
-    pygame.display.set_icon(self.icon)
+    self.jeu = True
+    #self.icon = pygame.image.load("asset\chevalier.png")
+    #pygame.display.set_icon(self.icon)
     pygame.display.set_caption("Anger Snake")
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
@@ -24,10 +26,12 @@ class interface() :
     # boucle permettant de rester la fenetre allumé
       for event in pygame.event.get() :
         # verifier si le joueur ferme la fenêtre
-        if event.type == pygame.QUIT:
+
+        if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE] :
           pygame.quit()
-          return False
           sys.exit()
+          return False
+          
       return True
 
   def analyse_grille(self):
@@ -83,3 +87,8 @@ class interface() :
 
   def dessine_perso(self,x,y):
     pygame.draw.rect(self.ecran, ((0,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
+
+  def fin_de_jeu(self):
+    while not pygame.key.get_pressed() :
+      self.dessine_rocher(10,10,20)
+    self.jeu = False
