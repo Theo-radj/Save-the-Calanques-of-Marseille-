@@ -84,7 +84,6 @@ class interface() :
     couleur = int(255*taux/20)
     pygame.draw.rect(self.ecran, (couleur,couleur,couleur), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
-
   def dessine_perso(self,x,y):
     pygame.draw.rect(self.ecran, ((0,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 

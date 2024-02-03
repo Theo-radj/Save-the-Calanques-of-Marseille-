@@ -1,11 +1,7 @@
 #IMPORT
-import sys
-
-
 from hero import *
 from interface import *
 from snake import *
-
 
 #FONCTION
 def control():
@@ -14,9 +10,7 @@ def control():
   global inter
   global compteur
 
-
   keys = pygame.key.get_pressed()
- 
   if keys:
     if keys[pygame.K_UP] or keys[pygame.K_w]:
       personnage.direction = "HAUT"
@@ -46,7 +40,6 @@ def control():
   compteur = compteur + 1 
   if (compteur%3) == 0:
     serpent.recherche_perso(grille)
-
 
 
 def gener_map(k):
@@ -79,7 +72,6 @@ if __name__ == "__main__":
       control()
       inter.analyse_grille()
       clock.tick(22)
-
 
 
       #if i ==  100:
