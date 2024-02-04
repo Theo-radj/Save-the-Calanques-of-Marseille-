@@ -4,6 +4,14 @@ from interface import *
 from snake import *
 
 #FONCTION
+def run_game() :
+  while inter.jeu :
+    inter.interface_ouvert()
+    inter.analyse_grille()
+    clock.tick(30)
+    control()
+
+
 def control():
   global personnage
   global grille
@@ -67,11 +75,8 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     run = True
     compteur = 0
-    while inter.jeu :
-      inter.update_interface_ouvert()
-      control()
-      inter.analyse_grille()
-      clock.tick(22)
+    run_game()
+    
 
 
       #if i ==  100:

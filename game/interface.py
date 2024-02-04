@@ -7,8 +7,10 @@ class interface() :
     # générer la fenêtre de notre jeux
     self.size = screen_size
     self.jeu = True
-    #self.icon = pygame.image.load("asset\chevalier.png")
-    #pygame.display.set_icon(self.icon)
+    self.icon = pygame.image.load("asset\chevalier.png")
+    self.exit_button = pygame.image.load("asset\exit_button.png")
+    self.play_button = pygame.image.load("asset\play_button.png")
+    pygame.display.set_icon(self.icon)
     pygame.display.set_caption("Anger Snake")
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
@@ -19,10 +21,12 @@ class interface() :
     self.nb_tile_y = self.size[1]//self.taille_tiles
     self.centre_x = int((self.nb_tile_x)//2)
     self.centre_y = int((self.nb_tile_y)//2)
-    self.max_horizontal_centre = len(self.grille) - self.centre_x
-    self.max_vertical_centre = len(self.grille[0]) - self.centre_y
+    self.max_horizontal_centre = len(self.grille[0]) - self.centre_x
+    self.max_vertical_centre = len(self.grille) - self.centre_y
+    self.police = pygame.font.Font("asset/ARCADECLASSIC.ttf",64)
+    self.score = 0
 
-  def update_interface_ouvert(self) :
+  def interface_ouvert(self) :
     # boucle permettant de rester la fenetre allumé
       for event in pygame.event.get() :
         # verifier si le joueur ferme la fenêtre
@@ -53,7 +57,7 @@ class interface() :
             self.dessine_serpent(x,y)
     pygame.display.flip()
 
-  def camera_perso(self, x, y) :
+  def camera_perso(self, x,y) :
     #cette fontion permet de savoir si on centre le joueur au milieu
     #de l'ecran ou pas  et ainsi cela permettrai au joueur d'etre
     #en haut a droite s'il est au bout de la map au lieu du milieu
@@ -81,13 +85,42 @@ class interface() :
     pygame.draw.rect(self.ecran, ((255,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
   def dessine_rocher(self, x,y, taux):
-    couleur = int(255*taux/20)
-    pygame.draw.rect(self.ecran, (couleur,couleur,couleur), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
+    couleur1 = int(255*taux/20)
+    couleur2 = int(153*taux/20)
+    pygame.draw.rect(self.ecran, (couleur1,couleur1,couleur1), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
   def dessine_perso(self,x,y):
     pygame.draw.rect(self.ecran, ((0,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
   def fin_de_jeu(self):
-    while not pygame.key.get_pressed() :
-      self.dessine_rocher(10,10,20)
+    self.ecran.fill((0,0,0))
+    texte1 = self.police.render("Game Over ! ", True , (255,255,255))
+    texte2 = self.police.render("Score "+ str(self.score),True , (255,255,255))
+
+    self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
+    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
+
+    play = pygame.transform.scale(self.play_button.convert_alpha(), (200,200))
+    exit = pygame.transform.scale(self.exit_button.convert_alpha(), (200,99))
+
+    
+    play_button_rect = play.get_rect(center = (self.size[0]//2, 300))
+    exit_button_react = exit.get_rect(center = (self.size[0]//2, 500 ))
+    self.ecran.blit(play,play_button_rect)
+    self.ecran.blit(exit,exit_button_react)
+    
+    k = True
+    while k :
+      self.interface_ouvert()
+      pygame.time.Clock().tick(30)
+      mouse_x, mouse_y = pygame.mouse.get_pos()
+      if play_button_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] or pygame.key.get_pressed()[pygame.K_SPACE]:
+        self.jeu = False
+        k = False
+      elif exit_button_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
+        pygame.quit()
+        sys.exit()
+      pygame.display.flip()
     self.jeu = False
+
+
