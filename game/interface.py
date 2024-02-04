@@ -106,14 +106,14 @@ class interface() :
     self.ecran.blit(play,play_button_rect)
     self.ecran.blit(exit,exit_button_react)
     
-    k = True
-    while k :
+    ecran_de_fin = True
+    while ecran_de_fin :
       self.interface_ouvert()
       pygame.time.Clock().tick(30)
       mouse_x, mouse_y = pygame.mouse.get_pos()
       if play_button_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] or pygame.key.get_pressed()[pygame.K_SPACE]:
         self.jeu = False
-        k = False
+        ecran_de_fin = False
       elif exit_button_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
         pygame.quit()
         sys.exit()
