@@ -7,9 +7,9 @@ class interface() :
     # générer la fenêtre de notre jeux
     self.size = screen_size
     self.jeu = True
-    self.icon = pygame.image.load("asset\chevalier.png")
-    self.exit_button = pygame.image.load("asset\exit_button.png")
-    self.play_button = pygame.image.load("asset\play_button.png")
+    self.icon = pygame.image.load("asset/chevalier.png")
+    self.exit_button = pygame.image.load("asset/exit_button.png")
+    self.play_button = pygame.image.load("asset/play_button.png")
     pygame.display.set_icon(self.icon)
     pygame.display.set_caption("Anger Snake")
     self.ecran = pygame.display.set_mode(self.size)
@@ -27,10 +27,7 @@ class interface() :
     self.score = 0
 
   def interface_ouvert(self) :
-    # boucle permettant de rester la fenetre allumé
       for event in pygame.event.get() :
-        # verifier si le joueur ferme la fenêtre
-
         if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE] :
           pygame.quit()
           sys.exit()
