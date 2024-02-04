@@ -45,7 +45,7 @@ class Snake() :
 
     dist_list = [dist_droite,dist_gauche,dist_bas,dist_haut]
     while direction == " ":
-      if len(dist_list)==0:
+      if len(dist_list) == 0:
         direction == "NUL"
         break
       else:

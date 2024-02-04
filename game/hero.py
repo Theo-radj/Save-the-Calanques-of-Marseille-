@@ -58,5 +58,3 @@ class perso() :
             self.pierre_time = 0
         if grille[self.joueur[0] + 1][self.joueur[1]] < 10:
             grille[self.joueur[0] + 1][self.joueur[1]] = 0
-
-
