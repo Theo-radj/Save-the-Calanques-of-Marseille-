@@ -6,11 +6,10 @@ from snake import *
 #FONCTION
 def run_game() :
   while inter.jeu :
-    inter.interface_ouvert()
+    inter.interface_ferme()
     inter.analyse_grille()
     clock.tick(30)
     control()
-
 
 def control():
   global personnage
@@ -41,14 +40,16 @@ def control():
       if personnage.joueur[0]+1 <= len(grille[0])-1:
         if grille[personnage.joueur[0]+1][personnage.joueur[1]] == 0:
           personnage.déplacement("DROITE", grille)
+  
+  if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+    inter.ecran_pause()
 
   if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
-    personnage.casser_pierre(grille)
+    personnage.casser_pierre(grille, inter)
 
   compteur = compteur + 1 
   if (compteur%3) == 0:
     serpent.recherche_perso(grille)
-
 
 def gener_map(k):
   my_map = [[0 for _ in range(k)] for _ in range(k)]
@@ -63,9 +64,9 @@ def gener_map(k):
           my_map[i][j] = 20
   return my_map
 
-
 #MAIN
 if __name__ == "__main__":
+  k = 0
   while True:
     Taille_map = 100
     grille = gener_map(Taille_map)
@@ -73,6 +74,9 @@ if __name__ == "__main__":
     inter = interface(grille, personnage)
     serpent = Snake(grille,personnage, inter)
     clock = pygame.time.Clock()
+    if k == 0:
+      inter.ecran_debut()
+      k = k + 1
     run = True
     compteur = 0
     run_game()

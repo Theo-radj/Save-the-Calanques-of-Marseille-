@@ -25,14 +25,16 @@ class interface() :
     self.max_vertical_centre = len(self.grille) - self.centre_y
     self.police = pygame.font.Font("asset/ARCADECLASSIC.ttf",64)
     self.score = 0
+    self.click_sound = pygame.mixer.Sound("asset/click_sound.mp3")
+    self.bruit_dead = pygame.mixer.Sound("asset/dead.mp3")
+    self.bruit_rocher = pygame.mixer.Sound("asset/casser_pierre.mp3")
 
-  def interface_ouvert(self) :
+  def interface_ferme(self) :
       for event in pygame.event.get() :
-        if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE] :
+        if event.type == pygame.QUIT :
           pygame.quit()
           sys.exit()
           return False
-          
       return True
 
   def analyse_grille(self):
@@ -92,11 +94,34 @@ class interface() :
   def fin_de_jeu(self):
     self.ecran.fill((0,0,0))
     texte1 = self.police.render("Game Over ! ", True , (255,255,255))
-    texte2 = self.police.render("Score "+ str(self.score),True , (255,255,255))
-
     self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
-    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
 
+    texte2 = self.police.render("Score "+ str(self.score),True , (255,255,255))
+    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
+    self.ecran_tempo()
+
+  def ecran_debut(self):
+    self.ecran.fill((0,0,0))
+
+    texte1 = self.police.render("Bienvenue", True , (255,255,255))
+    self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
+
+    texte2 = self.police.render("dans  notre  jeux",True , (255,255,255))
+    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
+    self.ecran_tempo()
+
+  def ecran_pause(self):
+    pause = True
+    while pause:
+      texte = self.police.render("Pause", True , (255,255,255))
+      self.ecran.blit(texte,(texte.get_rect(center = (self.size[0]//2, 150 ))))
+      pause = self.ecran_tempo()
+      self.jeu = True
+      pygame.display.flip()
+      pygame.time.wait(10)
+      
+
+  def ecran_tempo(self):
     play = pygame.transform.scale(self.play_button.convert_alpha(), (200,200))
     exit = pygame.transform.scale(self.exit_button.convert_alpha(), (200,99))
 
@@ -105,19 +130,23 @@ class interface() :
     exit_button_react = exit.get_rect(center = (self.size[0]//2, 500 ))
     self.ecran.blit(play,play_button_rect)
     self.ecran.blit(exit,exit_button_react)
+    pygame.display.flip()
     
     ecran_de_fin = True
     while ecran_de_fin :
-      self.interface_ouvert()
+      self.interface_ferme()
       pygame.time.Clock().tick(30)
       mouse_x, mouse_y = pygame.mouse.get_pos()
       if play_button_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] or pygame.key.get_pressed()[pygame.K_SPACE]:
+        if pygame.mouse.get_pressed()[0]:
+          self.click_sound.play()
+          pygame.time.delay(200)
         self.jeu = False
         ecran_de_fin = False
+        return False
+
       elif exit_button_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
         pygame.quit()
         sys.exit()
-      pygame.display.flip()
-    self.jeu = False
 
 

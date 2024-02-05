@@ -29,6 +29,7 @@ class Snake() :
     self.position.insert(0, new_tete)
     self.position.pop()
     if map[self.position[0][0]][self.position[0][1]] == 1:
+      self.inter.bruit_dead.play()
       self.inter.fin_de_jeu()
 
     map[self.position[-1][0]][self.position[-1][1]] = 0

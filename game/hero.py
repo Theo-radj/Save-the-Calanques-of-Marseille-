@@ -1,6 +1,7 @@
 ﻿import random
 import pygame
 
+
 class perso() :
   def __init__(self, nb,map):
     self.joueur = [random.randint(0,nb -1 ),random.randint(0,nb - 1)]
@@ -23,7 +24,7 @@ class perso() :
       self.joueur[0] += 1
     grille[self.joueur[0]][self.joueur[1]] = 1
 
-  def casser_pierre(self, grille) :
+  def casser_pierre(self, grille, inter) :
     time = pygame.time.get_ticks() - self.old_ticks_time
     self.old_ticks_time = pygame.time.get_ticks()
     self.pierre_time += time
@@ -58,3 +59,7 @@ class perso() :
             self.pierre_time = 0
         if grille[self.joueur[0] + 1][self.joueur[1]] < 10:
             grille[self.joueur[0] + 1][self.joueur[1]] = 0
+
+    if self.pierre_time == 0:
+      inter.bruit_rocher.play()
+       
