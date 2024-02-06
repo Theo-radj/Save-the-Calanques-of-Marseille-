@@ -1,3 +1,4 @@
+from turtle import position
 import pygame
 pygame.init()
 import sys
@@ -114,7 +115,10 @@ class interface() :
     pause = True
     while pause:
       texte = self.police.render("Pause", True , (255,255,255))
-      self.ecran.blit(texte,(texte.get_rect(center = (self.size[0]//2, 150 ))))
+      position = (self.size[0]//2, 150 )
+      texte_rect = texte.get_rect(center = position)
+      pygame.draw.rect(self.ecran, (10,10,10), texte_rect, 100)
+      self.ecran.blit(texte,texte_rect)     
       pause = self.ecran_tempo()
       self.jeu = True
       pygame.display.flip()
