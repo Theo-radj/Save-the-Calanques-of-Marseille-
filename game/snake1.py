@@ -1,5 +1,6 @@
 ﻿import random
-from hero import*
+from hero import *
+
 
 class Snake() :
   def __init__(self, map, personnage, inter):
