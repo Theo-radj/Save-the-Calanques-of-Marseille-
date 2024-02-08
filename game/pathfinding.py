@@ -9,7 +9,6 @@ def is_valid(map, position):
         return True
 
 
-
 def get_neighbors(map, current):
     x, y = current
     for dx in [-1, 0, 1]:

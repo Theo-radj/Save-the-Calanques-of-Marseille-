@@ -1,8 +1,11 @@
 #IMPORT
 from hero import *
 from interface import *
-from map import*
-from level_snake import * 
+from map import *
+import snake1
+#import snake2
+import snake3
+
 
 
 #FONCTION
@@ -14,6 +17,7 @@ def run_game() :
     clock.tick(15)
     control()
 
+
 def control():
   global personnage
   global grille
@@ -21,9 +25,9 @@ def control():
   global compteur
 
   keys = pygame.key.get_pressed()
-  if personnage.est_mort == False:
+  if serpent.perso_vie == True:
     if keys:
-      if keys[pygame.K_UP] or keys[pygame.K_w]:
+      if keys[pygame.K_UP] or keys[pygame.K_z]:
         personnage.direction = "HAUT"
         if grille[personnage.joueur[1]-1][personnage.joueur[0]] == 0 and personnage.joueur[1]-1 != -1:
           personnage.déplacement("HAUT", grille)
@@ -34,7 +38,7 @@ def control():
           if grille[personnage.joueur[1]+1][personnage.joueur[0]] == 0:
             personnage.déplacement("BAS", grille)
 
-      if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+      if keys[pygame.K_LEFT] or keys[pygame.K_q]:
         personnage.direction =  "GAUCHE"
         if grille[personnage.joueur[1]][personnage.joueur[0]-1] == 0 and personnage.joueur[0]-1 != -1:
           personnage.déplacement("GAUCHE", grille)
@@ -51,12 +55,14 @@ def control():
     if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
       personnage.casser_pierre(grille, inter)
   else:
+    #inter.bruit_dead.play()
     inter.fin_de_jeu()
 
 
   compteur = compteur + 1
   if (compteur%4) == 0:
-    serpent.recherche_perso(grille)
+    serpent.recherche_perso(grille, (personnage.joueur))
+    print(personnage.joueur)
 
 
 #MAIN
@@ -73,8 +79,15 @@ if __name__ == "__main__":
     if k == 0:
       inter.ecran_debut()
       k = k + 1
-      serpent =  level_snake().choisir_snake(inter.Niveau.niveau ,grille, personnage, inter)
-
+      if inter.Niveau.niveau == 1:
+        serpent = snake1.Snake1(grille, personnage) 
+      elif inter.Niveau.niveau == 2:
+        serpent = snake2.Snake(grille, personnage)
+      elif inter.Niveau.niveau == 3:
+        serpent  = snake3.Snake3(grille, personnage)
+      else: 
+        serpent = snake1.Snake1(grille, personnage)
+        
     run = True
     compteur = 0
     run_game()

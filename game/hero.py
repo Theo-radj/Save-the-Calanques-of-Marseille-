@@ -1,6 +1,5 @@
 ﻿import random
 import pygame
-from pathfinding import*
 
 class perso() :
   def __init__(self, nb,map):
@@ -10,7 +9,6 @@ class perso() :
     self.direction = " "
     self.pierre_time = 0
     self.old_ticks_time = 0
-    self.est_mort = False
 
   def déplacement(self, direction, grille):
     self.direction = direction
@@ -32,41 +30,42 @@ class perso() :
     self.pierre_time += time
 
     if self.direction =="HAUT" and self.joueur[1]-1 <= len(grille)-1 and grille[self.joueur[1]-1][self.joueur[0]] != 0:
-        if self.pierre_time > 200 :
-            if grille[self.joueur[1]-1][self.joueur[0]] == 4:
-                inter.score += 1
-            grille[self.joueur[1]-1][self.joueur[0]] -= 3
-            self.pierre_time = 0
+      if self.pierre_time > 200 :
+        if grille[self.joueur[1]-1][self.joueur[0]] == 4:
+          inter.score += 1
+        grille[self.joueur[1]-1][self.joueur[0]] -= 3
+        self.pierre_time = 0
 
-            if grille[self.joueur[1]-1][self.joueur[0]] < 10:
-                grille[self.joueur[1]-1][self.joueur[0]]  = 0
+        if grille[self.joueur[1]-1][self.joueur[0]] < 10:
+          grille[self.joueur[1]-1][self.joueur[0]]  = 0
 
     elif self.direction =="BAS" and self.joueur[1]+1 <= len(grille)-1 and grille[self.joueur[1]+1][self.joueur[0]] != 0:
-        if self.pierre_time > 200 :
-            if grille[self.joueur[1]+1][self.joueur[0]] == 4:
-                inter.score += 1
-            grille[self.joueur[1]+1][self.joueur[0]] -= 3
-            self.pierre_time = 0
+      if self.pierre_time > 200 :
+        if grille[self.joueur[1]+1][self.joueur[0]] == 4:
+          inter.score += 1
+        grille[self.joueur[1]+1][self.joueur[0]] -= 3
+        self.pierre_time = 0
 
-        if grille[self.joueur[1]+1][self.joueur[0]] < 10:
-            grille[self.joueur[1]+1][self.joueur[0]] = 0
+      if grille[self.joueur[1]+1][self.joueur[0]] < 10:
+        grille[self.joueur[1]+1][self.joueur[0]] = 0
 
     elif self.direction =="GAUCHE"  and self.joueur[0]-1 <= len(grille[0])-1 and grille[self.joueur[1]][self.joueur[0]-1] != 0:
-        if self.pierre_time > 200 :
-            if grille[self.joueur[1]][self.joueur[0-1]] == 4:
-                    inter.score += 1
-            grille[self.joueur[1]][self.joueur[0]-1] -= 3
-            self.pierre_time = 0
+      if self.pierre_time > 200 :
+        if grille[self.joueur[1]][self.joueur[0-1]] == 4:
+          inter.score += 1
+        grille[self.joueur[1]][self.joueur[0]-1] -= 3
+        self.pierre_time = 0
 
-            if grille[self.joueur[1]][self.joueur[0]-1] < 10:
-                grille[self.joueur[1]][self.joueur[0]-1] = 0
+        if grille[self.joueur[1]][self.joueur[0]-1] < 10:
+          grille[self.joueur[1]][self.joueur[0]-1] = 0
 
     elif self.direction =="DROITE" and self.joueur[0]+1 <= len(grille[0])-1 and grille[self.joueur[1]][self.joueur[0]+1] != 0 :
-        if self.pierre_time > 200 :
-            if grille[self.joueur[1]][self.joueur[0+1]] == 4:
-                    inter.score += 1
-            grille[self.joueur[1]][self.joueur[0]+1] -= 3
-            self.pierre_time = 0
+      if self.pierre_time > 200 :
+        if grille[self.joueur[1]][self.joueur[0+1]] == 4:
+          inter.score += 1
+        grille[self.joueur[1]][self.joueur[0]+1] -= 3
+        self.pierre_time = 0
+
         if grille[self.joueur[1]][self.joueur[0]+1] < 10:
-            grille[self.joueur[1]][self.joueur[0]+1] = 0
+          grille[self.joueur[1]][self.joueur[0]+1] = 0
 

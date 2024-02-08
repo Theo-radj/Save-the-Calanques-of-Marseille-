@@ -114,7 +114,7 @@ class interface() :
 
   def dessine_rocher(self, x,y, X,Y):
     if Y<len(self.grille)-1:
-      if self.grille[Y+1][X]>3:
+      if self.grille[Y+1][X]>10:
         self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
       else:
         self.ecran.blit(self.rock,(x*self.taille_tiles,y*self.taille_tiles))
@@ -197,6 +197,16 @@ class Niveau():
     self.inter.ecran.fill((0,0,0))
     
     if self.niveau == 0 :
+      text = self.inter.police.render("Choissisez",True , (255,255,255))
+      text_rect = text.get_rect(center = (self.inter.size[0]//2, 100))
+      self.inter.ecran.blit(text,text_rect)
+
+      text2 = self.inter.police.render("votre  niveau",True , (255,255,255))
+      text2_rect = text2.get_rect(center = (self.inter.size[0]//2, 150))
+      self.inter.ecran.blit(text2,text2_rect)
+
+
+
       niveau1 = self.inter.police.render("Niveau 1",True , (255,255,255))
       niveau1_rect = niveau1.get_rect(center = (self.inter.size[0]//2, 300))
       self.inter.ecran.blit(niveau1,niveau1_rect)
@@ -211,7 +221,6 @@ class Niveau():
       pygame.display.flip()
 
       while pygame.mouse.get_pressed()[0]:
-        print(pygame.mouse.get_pressed())
         for  event in pygame.event.get():
           if event.type == pygame.MOUSEBUTTONUP :
             pass

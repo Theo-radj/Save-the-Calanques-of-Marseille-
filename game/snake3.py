@@ -1,19 +1,20 @@
 ﻿import random
-from hero import*
-from pathfinding import*
+from hero import *
+from pathfinding import *
 
-
-class Snake() :
-  def __init__(self, map,personnage):
+class Snake3() :
+  def __init__(self, map, personnage):
     self.perso = personnage
     self.taille = random.randint(4,8)
     self.position = [(random.randint(self.taille,len(map)-1), random.randint(0,len(map)-1))]
+    self.perso_vie = True
     map[self.position[0][1]][self.position[0][0]]= 3
     for i in range(1,self.taille):
         self.position.append(((self.position[0][0]-i),(self.position[0][1])))
 
-  def deplacement(self,map,direction) :
 
+
+  def deplacement(self, map, direction) :
     tete = self.position[0]
     if direction == "HAUT":
       new_tete = (tete[0]),(tete[1]-1)
@@ -30,15 +31,16 @@ class Snake() :
     self.position.pop()
     map[self.position[-1][1]][self.position[-1][0]] = 0
     map[self.position[0][1]][self.position[0][0]] = 3
+    
 
-  def recherche_perso(self,map):
-    pos_joueur = self.perso.joueur[0],self.perso.joueur[1]
+  def recherche_perso(self, map, pos ):
+    pos_joueur = pos[0] , pos[1]
     coo_serpent = self.position[0]
     path = find_path(map,coo_serpent,pos_joueur)
     direction = ""
     if path != False:
       if len(path)==1:
-        self.perso.est_mort = True
+        self.perso_vie = False
       else:
         if path[1][1] == coo_serpent[1] + 1:
           direction = "BAS"
