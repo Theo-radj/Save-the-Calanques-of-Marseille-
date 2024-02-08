@@ -144,7 +144,7 @@ class interface() :
 
     texte2 = self.police.render("dans  notre  jeux",True , (255,255,255))
     self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
-    self.ecran_tempo()
+    self.ecran_tempo(True)
 
   def ecran_pause(self):
     pause = True
@@ -157,7 +157,7 @@ class interface() :
       pause = self.ecran_tempo()
       self.jeu = True
 
-  def ecran_tempo(self):
+  def ecran_tempo(self, montrer_level = False):
     play = pygame.transform.scale(self.play_button.convert_alpha(), (200,200))
     exit = pygame.transform.scale(self.exit_button.convert_alpha(), (200,100))
 
@@ -178,7 +178,8 @@ class interface() :
         if pygame.mouse.get_pressed()[0]:
           pass
           #self.click_sound.play()
-        self.Niveau.niveau_montrer()
+        if montrer_level:
+          self.Niveau.niveau_montrer()
         self.jeu = False
         ecran_tempo = False
         return False

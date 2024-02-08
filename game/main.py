@@ -25,7 +25,7 @@ def control():
   global compteur
 
   keys = pygame.key.get_pressed()
-  if serpent.perso_vie == True:
+  if personnage.perso_vie == True:
     if keys:
       if keys[pygame.K_UP] or keys[pygame.K_z]:
         personnage.direction = "HAUT"
@@ -61,8 +61,7 @@ def control():
 
   compteur = compteur + 1
   if (compteur%4) == 0:
-    serpent.recherche_perso(grille, (personnage.joueur))
-    print(personnage.joueur)
+    serpent.recherche_perso(grille, personnage)
 
 
 #MAIN

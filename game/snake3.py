@@ -7,7 +7,6 @@ class Snake3() :
     self.perso = personnage
     self.taille = random.randint(4,8)
     self.position = [(random.randint(self.taille,len(map)-1), random.randint(0,len(map)-1))]
-    self.perso_vie = True
     map[self.position[0][1]][self.position[0][0]]= 3
     for i in range(1,self.taille):
         self.position.append(((self.position[0][0]-i),(self.position[0][1])))
@@ -33,14 +32,14 @@ class Snake3() :
     map[self.position[0][1]][self.position[0][0]] = 3
     
 
-  def recherche_perso(self, map, pos ):
-    pos_joueur = pos[0] , pos[1]
+  def recherche_perso(self, map, perso ):
+    pos_joueur = perso.joueur[0] , perso.joueur[1]
     coo_serpent = self.position[0]
     path = find_path(map,coo_serpent,pos_joueur)
     direction = ""
     if path != False:
       if len(path)==1:
-        self.perso_vie = False
+        perso.perso_vie = False
       else:
         if path[1][1] == coo_serpent[1] + 1:
           direction = "BAS"

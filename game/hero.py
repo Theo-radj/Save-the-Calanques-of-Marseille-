@@ -6,6 +6,7 @@ class perso() :
     self.joueur = [random.randint(0,nb -1 ),random.randint(0,nb - 1)]
     self.couleur = (0, 255, 0)
     map[self.joueur[1]][self.joueur[0]] = 1
+    self.perso_vie = True
     self.direction = " "
     self.pierre_time = 0
     self.old_ticks_time = 0

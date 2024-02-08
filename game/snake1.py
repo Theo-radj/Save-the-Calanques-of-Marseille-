@@ -9,7 +9,6 @@ class Snake1() :
     self.taille = 5
     self.position = []
     self.position.append((random.randint(self.taille,45), random.randint(0,45)))
-    self.perso_vie = True
     map[self.position[0][0]][self.position[0][1]]= 3
     for i in range(1,self.taille):
         self.position.append(((self.position[0][0]-i),(self.position[0][1])))
@@ -31,11 +30,13 @@ class Snake1() :
     self.position.insert(0, new_tete)
     self.position.pop()
     if map[new_tete[1]][new_tete[0]] == 1:
-      self.perso_vie = False
+      self.perso.perso_vie = False
     map[self.position[-1][1]][self.position[-1][0]] = 0
     map[self.position[0][1]][self.position[0][0]] = 3
 
-  def recherche_perso(self,map,pos_joueur):
+  def recherche_perso(self,map,perso):
+    self.perso = perso
+    pos_joueur = perso.joueur
     direction = " "
     distance = ((pos_joueur[0]-self.position[0][0] )**2 + (pos_joueur[1]-self.position[0][1])**2)**0.5
     dist_droite = ((pos_joueur[0]-(self.position[0][0]+1) )**2 + (pos_joueur[1]-self.position[0][1])**2)**0.5
