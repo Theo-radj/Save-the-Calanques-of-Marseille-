@@ -30,7 +30,7 @@ class Snake1() :
     self.position.insert(0, new_tete)
     self.position.pop()
     if map[new_tete[1]][new_tete[0]] == 1:
-      self.perso.perso_vie = False
+      self.perso.est_vivant = False
     map[self.position[-1][1]][self.position[-1][0]] = 0
     map[self.position[0][1]][self.position[0][0]] = 3
 

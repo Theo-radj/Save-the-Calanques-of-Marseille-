@@ -23,9 +23,10 @@ def control():
   global grille
   global inter
   global compteur
+  global serpent
 
   keys = pygame.key.get_pressed()
-  if personnage.perso_vie == True:
+  if personnage.est_vivant :
     if keys:
       if keys[pygame.K_UP] or keys[pygame.K_z]:
         personnage.direction = "HAUT"
@@ -61,7 +62,9 @@ def control():
 
   compteur = compteur + 1
   if (compteur%4) == 0:
-    serpent.recherche_perso(grille, personnage)
+    for i in serpent:
+        print(i)
+        i.recherche_perso(grille, personnage)
 
 
 #MAIN
@@ -69,7 +72,7 @@ if __name__ == "__main__":
   Taille_map = 100
   clock = pygame.time.Clock()
   k = 0
-
+  serpent = []
   while True:
     carte = Grille(Taille_map)
     grille = carte.generation()
@@ -79,14 +82,17 @@ if __name__ == "__main__":
       inter.ecran_debut()
       k = k + 1
       if inter.Niveau.niveau == 1:
-        serpent = snake1.Snake1(grille, personnage) 
+        for i in range(5):
+            serpent.append(snake1.Snake1(grille, personnage))
       elif inter.Niveau.niveau == 2:
         serpent = snake2.Snake(grille, personnage)
       elif inter.Niveau.niveau == 3:
         serpent  = snake3.Snake3(grille, personnage)
-      else: 
+      else:
         serpent = snake1.Snake1(grille, personnage)
-        
+
+    print(serpent)
+
     run = True
     compteur = 0
     run_game()

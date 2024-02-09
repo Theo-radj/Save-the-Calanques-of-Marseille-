@@ -113,13 +113,18 @@ class interface() :
     pygame.draw.rect(self.ecran, ((255,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
   def dessine_rocher(self, x,y, X,Y):
+    transparence = (self.grille[Y][X]-10) /10 * 255
     if Y<len(self.grille)-1:
       if self.grille[Y+1][X]>10:
-        self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+        m = self.rock2
+        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
       else:
-        self.ecran.blit(self.rock,(x*self.taille_tiles,y*self.taille_tiles))
+        m = self.rock
+        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
     else:
-      self.ecran.blit(self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+        m = self.rock2
+        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
+
 
   def dessine_sac_poubelle(self, x,y):
     self.ecran.blit(self.poubelle,(x*self.taille_tiles,y*self.taille_tiles))
@@ -180,7 +185,8 @@ class interface() :
           #self.click_sound.play()
         if montrer_level:
           self.Niveau.niveau_montrer()
-        self.jeu = False
+        else :
+            self.jeu = False
         ecran_tempo = False
         return False
 
@@ -196,7 +202,7 @@ class Niveau():
 
   def niveau_montrer(self):
     self.inter.ecran.fill((0,0,0))
-    
+
     if self.niveau == 0 :
       text = self.inter.police.render("Choissisez",True , (255,255,255))
       text_rect = text.get_rect(center = (self.inter.size[0]//2, 100))
@@ -215,7 +221,7 @@ class Niveau():
       niveau2 = self.inter.police.render("Niveau 2",True , (255,255,255))
       niveau2_rect = niveau2.get_rect(center = (self.inter.size[0]//2, 400 ))
       self.inter.ecran.blit(niveau2,niveau2_rect)
-      
+
       niveau3 = self.inter.police.render("Niveau 3",True , (255,255,255))
       niveau3_rect = niveau3.get_rect(center = (self.inter.size[0]//2, 500 ))
       self.inter.ecran.blit(niveau3, niveau3_rect)
@@ -226,7 +232,7 @@ class Niveau():
           if event.type == pygame.MOUSEBUTTONUP :
             pass
         pygame.time.wait(100)
-           
+
 
       while self.niveau == 0 :
         mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -234,7 +240,7 @@ class Niveau():
           self.niveau = 1
 
         if niveau2_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
-          self.niveau  = 2  
+          self.niveau  = 2
 
         if niveau3_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
           self.niveau = 3

@@ -30,7 +30,7 @@ class Snake3() :
     self.position.pop()
     map[self.position[-1][1]][self.position[-1][0]] = 0
     map[self.position[0][1]][self.position[0][0]] = 3
-    
+
 
   def recherche_perso(self, map, perso ):
     pos_joueur = perso.joueur[0] , perso.joueur[1]
@@ -39,7 +39,7 @@ class Snake3() :
     direction = ""
     if path != False:
       if len(path)==1:
-        perso.perso_vie = False
+        perso.est_vivant = False
       else:
         if path[1][1] == coo_serpent[1] + 1:
           direction = "BAS"
