@@ -25,20 +25,20 @@ class interface() :
     self.max_vertical_centre = len(self.grille) - self.centre_y
     self.max_horizontal_centre = len(self.grille[0]) - self.centre_x
 
-    self.fond= pygame.image.load("asset/0000.png")
+    self.fond= pygame.image.load("asset/0000.png").convert_alpha()
     self.tiles_size_fond = 256
     self.fond = pygame.transform.scale(self.fond, (self.tiles_size_fond, self.tiles_size_fond))
 
-    self.rock= pygame.image.load("asset/rocks0.png")
+    self.rock= pygame.image.load("asset/rocks0.png").convert_alpha()
     self.rock = pygame.transform.scale(self.rock, (self.taille_tiles,self.taille_tiles))
 
-    self.rock2 = pygame.image.load("asset/rocks1.png")
+    self.rock2 = pygame.image.load("asset/rocks1.png").convert_alpha()
     self.rock2 = pygame.transform.scale(self.rock2, (self.taille_tiles,self.taille_tiles))
 
-    self.perso_sprite = pygame.image.load("asset/poissin3.png")
+    self.perso_sprite = pygame.image.load("asset/poissin3.png").convert_alpha()
     self.perso_sprite = pygame.transform.scale(self.perso_sprite, (self.taille_tiles,self.taille_tiles))
 
-    self.poubelle = pygame.image.load("asset/sac_poubelle.png")
+    self.poubelle = pygame.image.load("asset/sac_poubelle.png").convert_alpha()
     self.poubelle = pygame.transform.scale(self.poubelle, (self.taille_tiles,self.taille_tiles))
 
     self.exit_button = pygame.image.load("asset/exit_button.png")
@@ -113,17 +113,20 @@ class interface() :
     pygame.draw.rect(self.ecran, ((255,255,0)), (x*self.taille_tiles, y*self.taille_tiles,self.taille_tiles,self.taille_tiles))
 
   def dessine_rocher(self, x,y, X,Y):
-    transparence = (self.grille[Y][X]-10) /10 * 255
+    transparence = (self.grille[Y][X] - 10) /10 * 255
     if Y<len(self.grille)-1:
       if self.grille[Y+1][X]>10:
         m = self.rock2
-        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
+        m.set_alpha(transparence)
+        self.ecran.blit( m ,(x*self.taille_tiles,y*self.taille_tiles))
       else:
         m = self.rock
-        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
+        m.set_alpha(transparence)
+        self.ecran.blit( m ,(x*self.taille_tiles,y*self.taille_tiles))
     else:
         m = self.rock2
-        self.ecran.blit( pygame.surface_dessin.set_alpha(m, transparence) ,(x*self.taille_tiles,y*self.taille_tiles))
+        m.set_alpha(transparence)
+        self.ecran.blit( m,(x*self.taille_tiles,y*self.taille_tiles))
 
 
   def dessine_sac_poubelle(self, x,y):

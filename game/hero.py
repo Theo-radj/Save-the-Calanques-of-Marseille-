@@ -34,7 +34,8 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]-1][self.joueur[0]] == 4:
           inter.score += 1
-        grille[self.joueur[1]-1][self.joueur[0]] -= 3
+          print(inter.score)
+        grille[self.joueur[1]-1][self.joueur[0]] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]-1][self.joueur[0]] < 10:
@@ -44,7 +45,8 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]+1][self.joueur[0]] == 4:
           inter.score += 1
-        grille[self.joueur[1]+1][self.joueur[0]] -= 3
+          print(inter.score)
+        grille[self.joueur[1]+1][self.joueur[0]] -= 4
         self.pierre_time = 0
 
       if grille[self.joueur[1]+1][self.joueur[0]] < 10:
@@ -52,9 +54,10 @@ class perso() :
 
     elif self.direction =="GAUCHE"  and self.joueur[0]-1 <= len(grille[0])-1 and grille[self.joueur[1]][self.joueur[0]-1] != 0:
       if self.pierre_time > 200 :
-        if grille[self.joueur[1]][self.joueur[0-1]] == 4:
+        if grille[self.joueur[1]][self.joueur[0]-1] == 4:
           inter.score += 1
-        grille[self.joueur[1]][self.joueur[0]-1] -= 3
+          print(inter.score)
+        grille[self.joueur[1]][self.joueur[0]-1] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]][self.joueur[0]-1] < 10:
@@ -64,7 +67,8 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]][self.joueur[0+1]] == 4:
           inter.score += 1
-        grille[self.joueur[1]][self.joueur[0]+1] -= 3
+          print(inter.score)
+        grille[self.joueur[1]][self.joueur[0]+1] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]][self.joueur[0]+1] < 10:

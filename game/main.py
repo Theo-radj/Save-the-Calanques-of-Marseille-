@@ -63,7 +63,6 @@ def control():
   compteur = compteur + 1
   if (compteur%4) == 0:
     for i in serpent:
-        print(i)
         i.recherche_perso(grille, personnage)
 
 
@@ -83,15 +82,16 @@ if __name__ == "__main__":
       k = k + 1
       if inter.Niveau.niveau == 1:
         for i in range(5):
-            serpent.append(snake1.Snake1(grille, personnage))
+          serpent.append(snake1.Snake1(grille, personnage))
       elif inter.Niveau.niveau == 2:
-        serpent = snake2.Snake(grille, personnage)
+        for i in range(5):
+          serpent.append(snake2.Snake(grille, personnage))
       elif inter.Niveau.niveau == 3:
-        serpent  = snake3.Snake3(grille, personnage)
+        for i in range(5):
+          serpent.append(snake3.Snake3(grille, personnage))
       else:
-        serpent = snake1.Snake1(grille, personnage)
-
-    print(serpent)
+        for i in range(5):
+          serpent.append(snake1.Snake1(grille, personnage))
 
     run = True
     compteur = 0
