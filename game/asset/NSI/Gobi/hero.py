@@ -36,8 +36,10 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]-1][self.joueur[0]] == 2:
           self.score += 1
-          print(self.score)
-        grille[self.joueur[1]-1][self.joueur[0]] -= 4
+
+          grille[self.joueur[1]-1][self.joueur[0]] -= 2
+        else:
+          grille[self.joueur[1]-1][self.joueur[0]] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]-1][self.joueur[0]] < 10:
@@ -47,19 +49,23 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]+1][self.joueur[0]] == 2:
           self.score += 1
-          print(self.score)
-        grille[self.joueur[1]+1][self.joueur[0]] -= 4
+
+          grille[self.joueur[1]+1][self.joueur[0]] -= 2
+        else:
+          grille[self.joueur[1]+1][self.joueur[0]] -= 4
         self.pierre_time = 0
 
-      if grille[self.joueur[1]+1][self.joueur[0]] < 10:
-        grille[self.joueur[1]+1][self.joueur[0]] = 0
+        if grille[self.joueur[1]+1][self.joueur[0]] < 10:
+          grille[self.joueur[1]+1][self.joueur[0]] = 0
 
     elif self.direction =="GAUCHE"  and self.joueur[0]-1 <= len(grille[0])-1 and grille[self.joueur[1]][self.joueur[0]-1] != 0:
       if self.pierre_time > 200 :
         if grille[self.joueur[1]][self.joueur[0]-1] == 2:
           self.score += 1
-          print(self.score)
-        grille[self.joueur[1]][self.joueur[0]-1] -= 4
+
+          grille[self.joueur[1]][self.joueur[0]-1] -= 2
+        else:
+          grille[self.joueur[1]][self.joueur[0]-1] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]][self.joueur[0]-1] < 10:
@@ -69,8 +75,10 @@ class perso() :
       if self.pierre_time > 200 :
         if grille[self.joueur[1]][self.joueur[0+1]] == 2:
           self.score += 1
-          print(self.score)
-        grille[self.joueur[1]][self.joueur[0]+1] -= 4
+
+          grille[self.joueur[1]][self.joueur[0]+1] -= 2
+        else:
+          grille[self.joueur[1]][self.joueur[0]+1] -= 4
         self.pierre_time = 0
 
         if grille[self.joueur[1]][self.joueur[0]+1] < 10:
@@ -78,7 +86,7 @@ class perso() :
 
 
   def dead(self):
-     print("je suis mort")
+
      self.est_mort = True
 
 class Projectile():
@@ -123,7 +131,7 @@ class Projectile():
             mort = True
             case = 0
         elif self.dir == "GAUCHE":
-          if self.pos_proj[0]-1 > 0  and grille[self.pos_proj[1]][self.pos_proj[0]-1] <2:
+          if self.pos_proj[0] > 0  and grille[self.pos_proj[1]][self.pos_proj[0]-1] <2:
             self.pos_proj[0] -= 1
             case = self.sens
           elif grille[self.pos_proj[1]][self.pos_proj[0]-1] ==3:
@@ -147,7 +155,7 @@ class Projectile():
             mort = True
             case = 0
         elif self.dir == "HAUT":
-          if self.pos_proj[1]-1 > 0 and grille[self.pos_proj[1]-1][self.pos_proj[0]] <2:
+          if self.pos_proj[1] > 0 and grille[self.pos_proj[1]-1][self.pos_proj[0]] <2:
             self.pos_proj[1] -= 1
             case = self.sens
           elif grille[self.pos_proj[1]-1][self.pos_proj[0]] ==3:

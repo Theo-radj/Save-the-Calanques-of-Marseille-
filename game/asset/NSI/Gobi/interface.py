@@ -67,7 +67,8 @@ class interface() :
     self.centre_y = int((self.nb_tile_y)//2)
     self.max_vertical_centre = len(self.grille) - self.centre_y
     self.max_horizontal_centre = len(self.grille[0]) - self.centre_x
-
+    self.mission = True
+    self.Niveau = Niveau(self)
   def interface_ferme(self) :
       for event in pygame.event.get() :
         if event.type == pygame.QUIT :
@@ -86,7 +87,7 @@ class interface() :
     #et d'appeler les bonnes fonctions pour afficher ce qu'il y a à ces endroits
     self.ecran.fill((0,0,0))
     self.dessine_background(self.personnage.joueur)
-
+    self.mission = True
     for i in range(len(self.grille)):
       for j in range(len(self.grille[i])):
         x,y = self.camera_perso(j, i)
@@ -103,10 +104,15 @@ class interface() :
 
         elif affiche == 2 :
             self.dessine_sac_poubelle(x,y)
+            self.mission = False
 
         elif affiche >= 4 and affiche<=7:
             self.dessine_proj(x,y,affiche)
+
     pygame.display.flip()
+    if self.mission == True:
+      self.fin_de_jeu()
+
 
   def camera_perso(self, x, y) :
     if self.personnage.joueur[0] < self.centre_x :
@@ -189,7 +195,7 @@ class interface() :
     texte1 = self.police.render("Game Over ! ", True , (255,255,255))
     self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
 
-    texte2 = self.police.render("Score "+ str(self.score),True , (255,255,255))
+    texte2 = self.police.render("Score "+ str(self.personnage.score),True , (255,255,255))
     self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
     self.ecran_tempo()
 
@@ -201,7 +207,7 @@ class interface() :
 
     texte2 = self.police.render("dans  notre  jeux",True , (255,255,255))
     self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
-    self.ecran_tempo()
+    self.ecran_tempo(True)
 
   def ecran_pause(self):
     pause = True
@@ -217,7 +223,7 @@ class interface() :
       pygame.time.wait(10)
 
 
-  def ecran_tempo(self):
+  def ecran_tempo(self,montrer_level = False):
     play = pygame.transform.scale(self.play_button.convert_alpha(), (200,200))
     exit = pygame.transform.scale(self.exit_button.convert_alpha(), (200,99))
 
@@ -237,7 +243,10 @@ class interface() :
         if pygame.mouse.get_pressed()[0]:
           #self.click_sound.play()
           pygame.time.delay(200)
-        self.jeu = False
+        if montrer_level:
+          self.Niveau.niveau_montrer()
+        else :
+            self.jeu = False
         ecran_de_fin = False
         return False
 
@@ -245,4 +254,48 @@ class interface() :
         pygame.quit()
         sys.exit()
 
+class Niveau():
+  def __init__(self, inter):
+    self.inter = inter
+    self.niveau = 0
 
+  def niveau_montrer(self):
+    self.inter.ecran.fill((0,0,0))
+
+    if self.niveau == 0 :
+      text = self.inter.police.render("Choisissez",True , (255,255,255))
+      text_rect = text.get_rect(center = (self.inter.size[0]//2, 100))
+      self.inter.ecran.blit(text,text_rect)
+
+      text2 = self.inter.police.render("votre  niveau",True , (255,255,255))
+      text2_rect = text2.get_rect(center = (self.inter.size[0]//2, 150))
+      self.inter.ecran.blit(text2,text2_rect)
+
+
+
+      niveau1 = self.inter.police.render("Niveau 1",True , (255,255,255))
+      niveau1_rect = niveau1.get_rect(center = (self.inter.size[0]//2, 300))
+      self.inter.ecran.blit(niveau1,niveau1_rect)
+
+      niveau2 = self.inter.police.render("Niveau 2",True , (255,255,255))
+      niveau2_rect = niveau2.get_rect(center = (self.inter.size[0]//2, 400 ))
+      self.inter.ecran.blit(niveau2,niveau2_rect)
+
+      pygame.display.flip()
+
+      while pygame.mouse.get_pressed()[0]:
+        for  event in pygame.event.get():
+          if event.type == pygame.MOUSEBUTTONUP :
+            pass
+        pygame.time.wait(100)
+
+
+      while self.niveau == 0 :
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        if niveau1_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
+          self.niveau = 1
+
+        if niveau2_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
+          self.niveau  = 2
+
+        self.inter.interface_ferme()

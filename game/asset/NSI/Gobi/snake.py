@@ -58,7 +58,7 @@ class Snake() :
         touche = True
 
     if touche == True:
-      print(S)
+
       if len(self.position)> 4:
         for i in range(2):
           self.position.pop()
