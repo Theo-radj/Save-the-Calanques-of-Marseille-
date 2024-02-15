@@ -3,10 +3,11 @@ def is_valid(map, position):
     x, y = position
     if not (0 <= y < len(map) and 0 <= x < len(map[y])):
         return False
-    if map[y][x] > 1:
+    if map[y][x] > 7 or map[y][x] ==3:
         return False
     else:
         return True
+
 
 
 def get_neighbors(map, current):
