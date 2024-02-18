@@ -11,7 +11,7 @@ class interface() :
     self.jeu = True
     pygame.display.set_caption("Anger Snake")
 
-    self.icon = pygame.image.load("asset/chevalier.png")
+    self.icon = pygame.image.load("asset/logo.jpeg")
     pygame.display.set_icon(self.icon)
 
     self.tiles_size_fond = 256
@@ -37,14 +37,6 @@ class interface() :
     self.perso_d = pygame.image.load("asset/poissin3.png")
     self.perso_d = pygame.transform.scale(self.perso_d, (self.taille_tiles,self.taille_tiles))
 
-    self.murene_t = pygame.image.load("asset/murene/murene0.png")
-    self.murene_t = pygame.transform.scale(self.murene_t, ( self.taille_tiles,self.taille_tiles))
-    self.murene_c1 = pygame.image.load("asset/murene/murene1.png")
-    self.murene_c1 = pygame.transform.scale( self.murene_c1, (self.taille_tiles,self.taille_tiles))
-    self.murene_c2 = pygame.image.load("asset/murene/murene3.png")
-    self.murene_c2 = pygame.transform.scale(self.murene_c2, (self.taille_tiles,self.taille_tiles))
-    self.murene_q = pygame.image.load("asset/murene/murene2.png")
-    self.murene_q = pygame.transform.scale(self.murene_q, (self.taille_tiles,self.taille_tiles))
 
     self.exit_button = pygame.image.load("asset/exit_button.png")
     self.play_button = pygame.image.load("asset/play_button.png")
@@ -53,9 +45,6 @@ class interface() :
     self.poubelle = pygame.transform.scale(self.poubelle, (self.taille_tiles,self.taille_tiles))
     self.police = pygame.font.Font("asset/ARCADECLASSIC.ttf",64)
     self.score = 0
-    #self.click_sound = pygame.mixer.Sound("asset/click_sound.mp3")
-    #self.bruit_dead = pygame.mixer.Sound("asset/dead.mp3")
-    #self.bruit_rocher = pygame.mixer.Sound("asset/casser_pierre.mp3")
 
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
@@ -67,7 +56,6 @@ class interface() :
     self.centre_y = int((self.nb_tile_y)//2)
     self.max_vertical_centre = len(self.grille) - self.centre_y
     self.max_horizontal_centre = len(self.grille[0]) - self.centre_x
-    self.mission = True
     self.Niveau = Niveau(self)
   def interface_ferme(self) :
       for event in pygame.event.get() :
@@ -77,17 +65,11 @@ class interface() :
           return False
       return True
 
-  def analyse_grille(self):
-    if self.index <len(self.fond)-1:
-      self.index += 0.5
-    else:
-       self.index = 0
-
+  def analyse_grille(self,sacs):
     #cette fonction a chaque itération permet  d'analyser les cases de la grille
     #et d'appeler les bonnes fonctions pour afficher ce qu'il y a à ces endroits
     self.ecran.fill((0,0,0))
-    self.dessine_background(self.personnage.joueur)
-    self.mission = True
+    self.dessine_background()
     for i in range(len(self.grille)):
       for j in range(len(self.grille[i])):
         x,y = self.camera_perso(j, i)
@@ -104,14 +86,11 @@ class interface() :
 
         elif affiche == 2 :
             self.dessine_sac_poubelle(x,y)
-            self.mission = False
 
         elif affiche >= 4 and affiche<=7:
             self.dessine_proj(x,y,affiche)
-
+    self.affiche_score(sacs)
     pygame.display.flip()
-    if self.mission == True:
-      self.fin_de_jeu()
 
 
   def camera_perso(self, x, y) :
@@ -135,14 +114,26 @@ class interface() :
     self.centre_x += vitesse[0]
     self.centre_y += vitesse[1]
 
-  def dessine_background(self, pos_perso):
-    mx = pos_perso[0]
-    my = pos_perso[1]
+  def affiche_score(self,sacs):
+    aff_score = self.police.render(str(self.personnage.score)+"/"+str(sacs), True , (255,255,255))
+    if len(str(self.personnage.score)+str(sacs)) == 4:
+      long_x=120
+    elif len(str(self.personnage.score)+str(sacs)) == 3:
+      long_x=100
+    elif len(str(self.personnage.score)+str(sacs)) == 2:
+      long_x=80
+
+    aff_score = pygame.transform.scale(aff_score, (long_x,50))
+    self.ecran.blit(aff_score,(600,30))
+
+  def dessine_background(self):
     if self.index <len(self.fond)-1:
       self.index += 0.5
     else:
        self.index = 0
 
+    mx = self.personnage.joueur[0]
+    my = self.personnage.joueur[1]
 
     if mx > self.max_horizontal_centre or mx-  self.centre_x <0:
       mx=0
@@ -154,7 +145,7 @@ class interface() :
 
 
   def dessine_serpent(self, x,y,X,Y):
-    self.ecran.blit( self.murene_c1,(x*self.taille_tiles,y*self.taille_tiles))
+    pygame.draw.rect(self.ecran,(255,255,0),pygame.Rect(x*self.taille_tiles,y*self.taille_tiles, self.taille_tiles, self.taille_tiles))
 
   def dessine_proj(self,x,y,sens):
     if sens == 4:
@@ -195,8 +186,16 @@ class interface() :
     texte1 = self.police.render("Game Over ! ", True , (255,255,255))
     self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
 
-    texte2 = self.police.render("Score "+ str(self.personnage.score),True , (255,255,255))
-    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
+    self.ecran_tempo()
+
+  def mission_completed(self,time):
+    self.ecran.fill((0,0,0))
+    texte1 = self.police.render("Mission reussie ! ", True , (255,255,255))
+
+    self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 100 ))))
+
+    texte2 = self.police.render("Score "+ (str(int((self.personnage.score/(time/1000))*1000))),True , (255,255,255))
+    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 150 ))))
     self.ecran_tempo()
 
   def ecran_debut(self):
@@ -239,9 +238,8 @@ class interface() :
       self.interface_ferme()
       pygame.time.Clock().tick(30)
       mouse_x, mouse_y = pygame.mouse.get_pos()
-      if play_button_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] or pygame.key.get_pressed()[pygame.K_SPACE]:
+      if play_button_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
         if pygame.mouse.get_pressed()[0]:
-          #self.click_sound.play()
           pygame.time.delay(200)
         if montrer_level:
           self.Niveau.niveau_montrer()
@@ -281,6 +279,12 @@ class Niveau():
       niveau2_rect = niveau2.get_rect(center = (self.inter.size[0]//2, 400 ))
       self.inter.ecran.blit(niveau2,niveau2_rect)
 
+      niveau3 = self.inter.police.render("Niveau 3",True , (255,255,255))
+      niveau3_rect = niveau3.get_rect(center = (self.inter.size[0]//2, 500 ))
+      self.inter.ecran.blit(niveau3,niveau3_rect)
+
+
+
       pygame.display.flip()
 
       while pygame.mouse.get_pressed()[0]:
@@ -298,4 +302,6 @@ class Niveau():
         if niveau2_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
           self.niveau  = 2
 
+        if niveau3_rect.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
+          self.niveau  = 3
         self.inter.interface_ferme()

@@ -1,16 +1,15 @@
 #IMPORT
 from hero import *
 from interface import *
-import snake
+from snake import *
 from map import*
-import snake1
 #FONCTION
 
 def run_game() :
   while inter.jeu :
     control()
     inter.interface_ferme()
-    inter.analyse_grille()
+    inter.analyse_grille(nombre_de_sacs)
     clock.tick(30)
 
 
@@ -23,6 +22,9 @@ def control():
   global old_ticks_time
   global epine_time
   global serpents
+  global game_time
+  if personnage.score == nombre_de_sacs:
+    inter.mission_completed(game_time)
 
   keys = pygame.key.get_pressed()
   if personnage.est_mort == False:
@@ -34,9 +36,11 @@ def control():
 
 
     time = pygame.time.get_ticks() - old_ticks_time
+    time = pygame.time.get_ticks() - old_ticks_time
+    time = pygame.time.get_ticks() - old_ticks_time
     old_ticks_time = pygame.time.get_ticks()
     epine_time += time
-
+    game_time += time
 
     if keys:
       if (compteur%2) == 0:
@@ -110,7 +114,7 @@ def control():
 
 
   compteur = compteur + 1
-  if (compteur%6) == 0:
+  if (compteur%vitesse_serpent) == 0:
     for serpent in serpents:
       serpent.recherche_perso(grille)
     if len(serpents) == 0:
@@ -124,10 +128,10 @@ if __name__ == "__main__":
   Taille_map = 100
   clock = pygame.time.Clock()
   k = 0
-
+  vitesse_serpent = 0
   while True:
     carte = Grille(Taille_map)
-    grille = carte.generation()
+    grille,nombre_de_sacs = carte.generation()
     personnage = perso(Taille_map,grille)
     inter = interface(grille, personnage)
     serpents = []
@@ -135,16 +139,21 @@ if __name__ == "__main__":
     projectiles = []
 
     compteur = 0
-
+    game_time = 0
     epine_time = 0
     old_ticks_time = 0
+    
+    serpents.append(Snake(grille, personnage))
     if k == 0:
       inter.ecran_debut()
       k = k + 1
-      if inter.Niveau.niveau == 1:
-        serpents.append(snake1.Snake1(grille, personnage))
-      elif inter.Niveau.niveau == 2:
-        serpents.append(snake.Snake(grille, personnage))
+    if inter.Niveau.niveau == 1:
+      vitesse_serpent = 6
+    elif inter.Niveau.niveau == 2:
+      vitesse_serpent = 3
+    elif inter.Niveau.niveau == 3:
+      vitesse_serpent = 3
+    serpents.append(Snake(grille, personnage))
 
     run_game()
 

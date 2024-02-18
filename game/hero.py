@@ -73,7 +73,7 @@ class perso() :
 
     elif self.direction =="DROITE" and self.joueur[0]+1 <= len(grille[0])-1 and grille[self.joueur[1]][self.joueur[0]+1] != 0 :
       if self.pierre_time > 200 :
-        if grille[self.joueur[1]][self.joueur[0+1]] == 2:
+        if grille[self.joueur[1]][self.joueur[0]+1] == 2:
           self.score += 1
 
           grille[self.joueur[1]][self.joueur[0]+1] -= 2
