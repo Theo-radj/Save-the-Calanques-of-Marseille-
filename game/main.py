@@ -7,9 +7,9 @@ from map import*
 
 def run_game() :
   while inter.jeu :
-    control()
     inter.interface_ferme()
     inter.analyse_grille(nombre_de_sacs)
+    control()
     clock.tick(30)
 
 
@@ -148,11 +148,12 @@ if __name__ == "__main__":
       inter.ecran_debut()
       k = k + 1
     if inter.Niveau.niveau == 1:
-      vitesse_serpent = 6
+      vitesse_serpent = 7
     elif inter.Niveau.niveau == 2:
-      vitesse_serpent = 3
+      vitesse_serpent = 5
     elif inter.Niveau.niveau == 3:
-      vitesse_serpent = 3
+      vitesse_serpent = 4
+      serpents.append(Snake(grille, personnage))
     serpents.append(Snake(grille, personnage))
 
     run_game()
