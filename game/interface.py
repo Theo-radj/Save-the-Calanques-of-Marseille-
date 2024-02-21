@@ -244,7 +244,7 @@ class interface() :
         if montrer_level:
           self.Niveau.niveau_montrer()
         else :
-            self.jeu = False
+          self.jeu = False
         ecran_de_fin = False
         return False
 
