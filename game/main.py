@@ -24,7 +24,8 @@ def control():
   global serpents
   global game_time
   if personnage.score == nombre_de_sacs:
-    inter.mission_completed(game_time)
+    score(game_time)
+    inter.mission_completed()
 
   keys = pygame.key.get_pressed()
   if personnage.est_mort == False:
@@ -121,6 +122,28 @@ def control():
       serpents.append(Snake(grille,personnage))
 
 
+def score(game_time) :
+  with open ("asset/score.txt", 'r') as fichier :
+    Liste_score = [0]*20
+    k = 0
+    for i in fichier.readlines():
+      Liste_score[k] = int(i)
+      k = k + 1
+  personnage.score = int((personnage.score/(game_time/1000))*1000)
+  for i in range(5):
+    if personnage.score >= Liste_score[i] :
+        list_tempo = Liste_score[i:]
+        for j in range(len(list_tempo) - 1, 0, -1):
+          Liste_score[i+j] = list_tempo[j-1]
+        Liste_score[i] = personnage.score
+        break
+
+  with open ("asset/score.txt", 'w') as fichier :
+    for i in Liste_score[:5] :
+      print(i)
+      fichier.write(f"{i}\n")
+
+
 
 
 #MAIN
@@ -157,6 +180,9 @@ if __name__ == "__main__":
     serpents.append(Snake(grille, personnage))
 
     run_game()
+
+    
+
 
 
 

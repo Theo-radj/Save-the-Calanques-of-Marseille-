@@ -1,6 +1,8 @@
+from turtle import delay
 import pygame
 pygame.init()
 import sys
+import random
 
 
 
@@ -44,7 +46,6 @@ class interface() :
     self.poubelle = pygame.image.load("asset/sac_poubelle.png")
     self.poubelle = pygame.transform.scale(self.poubelle, (self.taille_tiles,self.taille_tiles))
     self.police = pygame.font.Font("asset/ARCADECLASSIC.ttf",64)
-    self.score = 0
 
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
@@ -57,6 +58,9 @@ class interface() :
     self.max_vertical_centre = len(self.grille) - self.centre_y
     self.max_horizontal_centre = len(self.grille[0]) - self.centre_x
     self.Niveau = Niveau(self)
+
+
+
   def interface_ferme(self) :
       for event in pygame.event.get() :
         if event.type == pygame.QUIT :
@@ -188,24 +192,47 @@ class interface() :
 
     self.ecran_tempo()
 
-  def mission_completed(self,time):
+  def mission_completed(self):
     self.ecran.fill((0,0,0))
     texte1 = self.police.render("Mission reussie ! ", True , (255,255,255))
 
     self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 100 ))))
 
-    texte2 = self.police.render("Score "+ (str(int((self.personnage.score/(time/1000))*1000))),True , (255,255,255))
+    texte2 = self.police.render("Score "+ (str(self.personnage.score)),True , (255,255,255))
     self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 150 ))))
     self.ecran_tempo()
 
   def ecran_debut(self):
     self.ecran.fill((0,0,0))
+    animation = True
 
-    texte1 = self.police.render("Bienvenue", True , (255,255,255))
-    self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
+    pos1 = self.size[0]//2 - 150
+    for i in "Bienvenue" :
 
-    texte2 = self.police.render("dans  notre  jeux",True , (255,255,255))
-    self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 200 ))))
+      if pygame.key.get_pressed()[pygame.K_ESCAPE] or pygame.key.get_pressed()[pygame.K_SPACE]:
+        print("kjh")
+        animation = False
+      texte1 = self.police.render(i, True , (255,255,255))
+      self.ecran.blit(texte1,(texte1.get_rect(center = (pos1, 150 ))))
+      pygame.display.flip()
+      if animation:
+        pause = random.randint(20,250)
+        pygame.time.delay(pause)
+      pos1 += 40
+      
+    pos2 = self.size[0]//2 - 280
+    for i in "dans notre jeux" :
+      if pygame.key.get_pressed()[pygame.K_ESCAPE] or pygame.key.get_pressed()[pygame.K_SPACE]:
+        print("kjh")
+        animation = False
+      texte2 = self.police.render(i,True , (255,255,255))
+      self.ecran.blit(texte2,(texte2.get_rect(center = (pos2, 200 ))))
+      pygame.display.flip()
+      if animation :
+        pause = random.randint(20,250)
+        pygame.time.delay(pause)
+      pos2 += 40
+
     self.ecran_tempo(True)
 
   def ecran_pause(self):
@@ -223,14 +250,17 @@ class interface() :
 
 
   def ecran_tempo(self,montrer_level = False):
-    play = pygame.transform.scale(self.play_button.convert_alpha(), (200,200))
-    exit = pygame.transform.scale(self.exit_button.convert_alpha(), (200,99))
-
+    play = pygame.transform.scale(self.play_button.convert_alpha(), (225,75))
+    exit = pygame.transform.scale(self.exit_button.convert_alpha(), (225,75))
+    score = self.police.render("Score", True , (255,255,255))
 
     play_button_rect = play.get_rect(center = (self.size[0]//2, 300))
     exit_button_react = exit.get_rect(center = (self.size[0]//2, 500 ))
+    score_react = score.get_rect(center = (self.size[0]//2, 400 ))
+
     self.ecran.blit(play,play_button_rect)
     self.ecran.blit(exit,exit_button_react)
+    self.ecran.blit(score, score_react)
     pygame.display.flip()
 
     ecran_de_fin = True
@@ -249,8 +279,41 @@ class interface() :
         return False
 
       elif exit_button_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
+
         pygame.quit()
         sys.exit()
+
+      elif score_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
+        self.ecran.fill((0,0,0))
+        text = self.police.render("Les  scores",True , (255,255,255))
+        text_rect = text.get_rect(center = (self.size[0]//2, 100))
+        self.ecran.blit(text,text_rect)
+
+        smaller_font = pygame.font.Font("asset/ARCADECLASSIC.ttf", 32)
+        texte = smaller_font.render("Appyez  sur  echap  pour  lancer le jeu",True,(255,255,255))
+        texte_rect = texte.get_rect(center = (self.size[0]//2, 650))
+        self.ecran.blit(texte, texte_rect)   
+
+        pos = 250
+        with open ("asset/score.txt", 'r') as fichier :
+          for i in fichier.readlines():
+            texte = self.police.render(i[:-1],True,(255,255,255))
+            texte_rect = texte.get_rect(center = (self.size[0]//2, pos))
+            self.ecran.blit(texte, texte_rect)
+            pos += 75
+            pygame.display.flip()
+            pygame.time.delay(100)
+        while not pygame.key.get_pressed()[pygame.K_ESCAPE]:
+          self.interface_ferme()
+        ecran_de_fin = False
+        self.ecran_debut()
+        
+
+  
+  
+        
+
+
 
 class Niveau():
   def __init__(self, inter):
