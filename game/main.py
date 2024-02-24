@@ -3,6 +3,10 @@ from hero import *
 from interface import *
 from snake import *
 from map import*
+
+
+
+
 #FONCTION
 
 def run_game() :
@@ -10,6 +14,7 @@ def run_game() :
     inter.interface_ferme()
     inter.analyse_grille(nombre_de_sacs)
     control()
+    print(pygame.event.get())
     clock.tick(30)
 
 
@@ -45,7 +50,7 @@ def control():
 
     if keys:
       if (compteur%2) == 0:
-        if keys[pygame.K_UP] or keys[pygame.K_w]:
+        if keys[pygame.K_UP] or keys[pygame.K_z]:
           personnage.direction = "HAUT"
           if grille[personnage.joueur[1]-1][personnage.joueur[0]] == 0 and personnage.joueur[1]-1 != -1:
             personnage.déplacement("HAUT", grille)
@@ -56,7 +61,7 @@ def control():
             if grille[personnage.joueur[1]+1][personnage.joueur[0]] == 0:
               personnage.déplacement("BAS", grille)
 
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_q]:
           personnage.direction =  "GAUCHE"
           if grille[personnage.joueur[1]][personnage.joueur[0]-1] == 0 and personnage.joueur[0]-1 != -1:
             personnage.déplacement("GAUCHE", grille)

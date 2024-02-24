@@ -1,5 +1,6 @@
 from turtle import delay
 import pygame
+from sympy import true
 pygame.init()
 import sys
 import random
@@ -189,7 +190,7 @@ class interface() :
     self.ecran.fill((0,0,0))
     texte1 = self.police.render("Game Over ! ", True , (255,255,255))
     self.ecran.blit(texte1,(texte1.get_rect(center = (self.size[0]//2, 150 ))))
-
+    pygame.time.wait(100)
     self.ecran_tempo()
 
   def mission_completed(self):
@@ -200,40 +201,47 @@ class interface() :
 
     texte2 = self.police.render("Score "+ (str(self.personnage.score)),True , (255,255,255))
     self.ecran.blit(texte2,(texte2.get_rect(center = (self.size[0]//2, 150 ))))
+    pygame.time.wait(800)
     self.ecran_tempo()
 
-  def ecran_debut(self):
+  def ecran_debut(self, animation = True):
     self.ecran.fill((0,0,0))
-    animation = True
 
     pos1 = self.size[0]//2 - 150
     for i in "Bienvenue" :
-
-      if pygame.key.get_pressed()[pygame.K_ESCAPE] or pygame.key.get_pressed()[pygame.K_SPACE]:
-        print("kjh")
-        animation = False
+      self.interface_ferme()
+      animation = self.verif_echap_espace(animation)
       texte1 = self.police.render(i, True , (255,255,255))
       self.ecran.blit(texte1,(texte1.get_rect(center = (pos1, 150 ))))
       pygame.display.flip()
       if animation:
-        pause = random.randint(20,250)
-        pygame.time.delay(pause)
+        pause = random.randint(20,300)
+        pygame.time.wait(pause)
       pos1 += 40
       
     pos2 = self.size[0]//2 - 280
     for i in "dans notre jeux" :
-      if pygame.key.get_pressed()[pygame.K_ESCAPE] or pygame.key.get_pressed()[pygame.K_SPACE]:
-        print("kjh")
-        animation = False
+      self.interface_ferme()
+      animation = self.verif_echap_espace(animation)
       texte2 = self.police.render(i,True , (255,255,255))
       self.ecran.blit(texte2,(texte2.get_rect(center = (pos2, 200 ))))
       pygame.display.flip()
       if animation :
-        pause = random.randint(20,250)
-        pygame.time.delay(pause)
+        pause = random.randint(20,300)
+        pygame.time.wait(pause)
       pos2 += 40
 
     self.ecran_tempo(True)
+
+  def verif_echap_espace(self,animation):
+    print(pygame.event.get())
+    for event in pygame.event.get():
+      print(event)
+      if event.type == pygame.KEYDOWN:
+        animation = False
+        break
+    return animation
+
 
   def ecran_pause(self):
     pause = True
@@ -306,7 +314,7 @@ class interface() :
         while not pygame.key.get_pressed()[pygame.K_ESCAPE]:
           self.interface_ferme()
         ecran_de_fin = False
-        self.ecran_debut()
+        self.ecran_debut(False)
         
 
   
