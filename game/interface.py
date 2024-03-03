@@ -1,6 +1,4 @@
-from turtle import delay
 import pygame
-from sympy import true
 pygame.init()
 import sys
 import random
