@@ -5,8 +5,6 @@ from snake import *
 from map import*
 
 
-
-
 #FONCTION
 
 def run_game() :
@@ -14,7 +12,6 @@ def run_game() :
     inter.interface_ferme()
     inter.analyse_grille(nombre_de_sacs)
     control()
-    print(pygame.event.get())
     clock.tick(30)
 
 
@@ -147,7 +144,6 @@ def score(game_time) :
     for i in Liste_score[:5] :
       print(i)
       fichier.write(f"{i}\n")
-
 
 
 

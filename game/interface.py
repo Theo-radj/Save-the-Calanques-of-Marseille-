@@ -20,11 +20,11 @@ class interface() :
     self.tiles_size_fond = 256
     self.fond = []
     for i in range (0,40):
-        if i < 10:
-            i = "0"+str(i)
-        else:
-            i = str(i)
-        self.fond.append(pygame.transform.scale((pygame.image.load('asset/water_128px_frames/00'+i+".png")), (self.tiles_size_fond, self.tiles_size_fond)))
+      if i < 10:
+        i = "0"+str(i)
+      else:
+        i = str(i)
+      self.fond.append(pygame.transform.scale((pygame.image.load('asset/water_128px_frames/00'+i+".png")), (self.tiles_size_fond, self.tiles_size_fond)))
     self.index = 0
 
     self.taille_tiles = 36
@@ -40,14 +40,23 @@ class interface() :
     self.perso_d = pygame.image.load("asset/poissin3.png")
     self.perso_d = pygame.transform.scale(self.perso_d, (self.taille_tiles,self.taille_tiles))
 
-
     self.exit_button = pygame.image.load("asset/exit_button.png")
     self.play_button = pygame.image.load("asset/play_button.png")
 
     self.poubelle = pygame.image.load("asset/sac_poubelle.png")
     self.poubelle = pygame.transform.scale(self.poubelle, (self.taille_tiles,self.taille_tiles))
+
     self.police = pygame.font.Font("asset/ARCADECLASSIC.ttf",64)
 
+    self.tete = pygame.image.load("asset/murene/murene0.png")
+    self.tete = pygame.transform.scale(self.tete, (self.taille_tiles,self.taille_tiles))
+    self.corp_ligne = pygame.image.load("asset/murene/murene1.png")
+    self.corp_ligne = pygame.transform.scale(self.corp_ligne,(self.taille_tiles,self.taille_tiles))
+    self.queue = pygame.image.load("asset/murene/murene3.png")
+    self.queue = pygame.transform.scale(self.queue, (self.taille_tiles,self.taille_tiles))
+    self.tourner_bas_droit = pygame.image.load("asset/murene/murene2.png")
+    self.tourner_bas_droit = pygame.transform.scale(self.tourner_bas_droit, (self.taille_tiles,self.taille_tiles))
+    
     self.ecran = pygame.display.set_mode(self.size)
     self.surface_dessin = pygame.Surface((180, 150))
     self.grille = grille
@@ -63,12 +72,12 @@ class interface() :
 
 
   def interface_ferme(self) :
-      for event in pygame.event.get() :
-        if event.type == pygame.QUIT :
-          pygame.quit()
-          sys.exit()
-          return False
-      return True
+    for event in pygame.event.get() :
+      if event.type == pygame.QUIT :
+        pygame.quit()
+        sys.exit()
+        return False
+    return True
 
   def analyse_grille(self,sacs):
     #cette fonction a chaque itération permet  d'analyser les cases de la grille
@@ -86,14 +95,15 @@ class interface() :
         elif affiche == 1:
           self.dessine_perso(x,y)
 
-        elif affiche == 3:
-            self.dessine_serpent(x,y,j,i)
+        elif affiche > 20 and affiche  < 35 :
+          print(100)    
+          self.dessine_serpent(x,y,j,i, affiche)
 
         elif affiche == 2 :
-            self.dessine_sac_poubelle(x,y)
+          self.dessine_sac_poubelle(x,y)
 
         elif affiche >= 4 and affiche<=7:
-            self.dessine_proj(x,y,affiche)
+          self.dessine_proj(x,y,affiche)
     self.affiche_score(sacs)
     pygame.display.flip()
 
@@ -140,17 +150,44 @@ class interface() :
     mx = self.personnage.joueur[0]
     my = self.personnage.joueur[1]
 
-    if mx > self.max_horizontal_centre or mx-  self.centre_x <0:
-      mx=0
-    if my > self.max_vertical_centre or my- self.centre_y <0:
-      my=0
+    if mx > self.max_horizontal_centre or mx-  self.centre_x < 0:
+      mx = 0
+    if my > self.max_vertical_centre or my- self.centre_y < 0:
+      my = 0
     for v in range(0,4000,self.tiles_size_fond):
       for b in range(0,4000,self.tiles_size_fond):
           self.ecran.blit( self.fond[int(self.index)],(v-((mx*self.taille_tiles)/3),b-((my*self.taille_tiles)/3)))
 
 
-  def dessine_serpent(self, x,y,X,Y):
-    pygame.draw.rect(self.ecran,(255,255,0),pygame.Rect(x*self.taille_tiles,y*self.taille_tiles, self.taille_tiles, self.taille_tiles))
+  def dessine_serpent(self, x,y,X,Y,pos):
+    if pos == 21:
+      self.ecran.blit( pygame.transform.rotate(self.tete,90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 22:
+      self.ecran.blit(pygame.transform.rotate(self.tete,-90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 23 :
+      self.ecran.blit(pygame.transform.rotate(self.tete,-180),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 24:
+      self.ecran.blit( self.tete,(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 25 :
+      self.ecran.blit(self.corp_ligne,(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 26 :
+      self.ecran.blit(pygame.transform.rotate(self.corp_ligne,-90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 27:
+      self.ecran.blit( self.tourner_bas_droit,(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 28:
+      self.ecran.blit( pygame.transform.rotate(self.tourner_bas_droit,-90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 29:
+      self.ecran.blit( pygame.transform.rotate(self.tourner_bas_droit,180),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 30:
+      self.ecran.blit( pygame.transform.rotate(self.tourner_bas_droit,90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 31:
+      self.ecran.blit( pygame.transform.rotate(self.queue,-90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 32:
+      self.ecran.blit( pygame.transform.rotate(self.queue,90),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 33:
+      self.ecran.blit( pygame.transform.rotate(self.queue,180),(x*self.taille_tiles,y*self.taille_tiles))
+    elif pos == 34:
+      self.ecran.blit( self.queue,(x*self.taille_tiles,y*self.taille_tiles))
 
   def dessine_proj(self,x,y,sens):
     if sens == 4:
@@ -164,8 +201,8 @@ class interface() :
       self.ecran.blit( pygame.transform.rotate(self.epine, 90),(x*self.taille_tiles,y*self.taille_tiles))
 
   def dessine_rocher(self, x,y, X,Y):
-    if Y<len(self.grille)-1:
-      if self.grille[Y+1][X]>10:
+    if Y < len(self.grille)-1:
+      if self.grille[Y+1][X]>10 and self.grille[Y+1][X]<10 :
         self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
       else:
         self.ecran.blit( self.rock,(x*self.taille_tiles,y*self.taille_tiles))
@@ -234,9 +271,7 @@ class interface() :
     self.ecran_tempo(True)
 
   def verif_echap_espace(self,animation):
-    print(pygame.event.get())
     for event in pygame.event.get():
-      print(event)
       if event.type == pygame.KEYDOWN:
         animation = False
         break
