@@ -142,7 +142,6 @@ def score(game_time) :
 
   with open ("asset/score.txt", 'w') as fichier :
     for i in Liste_score[:5] :
-      print(i)
       fichier.write(f"{i}\n")
 
 

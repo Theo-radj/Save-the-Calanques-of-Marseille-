@@ -94,7 +94,6 @@ class interface() :
           self.dessine_perso(x,y)
 
         elif affiche > 20 and affiche  < 35 :
-          print(100)    
           self.dessine_serpent(x,y,j,i, affiche)
 
         elif affiche == 2 :
@@ -200,7 +199,7 @@ class interface() :
 
   def dessine_rocher(self, x,y, X,Y):
     if Y < len(self.grille)-1:
-      if self.grille[Y+1][X]>10 and self.grille[Y+1][X]<10 :
+      if self.grille[Y+1][X]>10 and self.grille[Y+1][X]<=20 :
         self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
       else:
         self.ecran.blit( self.rock,(x*self.taille_tiles,y*self.taille_tiles))
