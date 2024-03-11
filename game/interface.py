@@ -292,15 +292,16 @@ class interface() :
   def ecran_tempo(self,montrer_level = False):
     play = pygame.transform.scale(self.play_button.convert_alpha(), (225,75))
     exit = pygame.transform.scale(self.exit_button.convert_alpha(), (225,75))
-    score = self.police.render("Score", True , (255,255,255))
-
+    
     play_button_rect = play.get_rect(center = (self.size[0]//2, 300))
     exit_button_react = exit.get_rect(center = (self.size[0]//2, 500 ))
-    score_react = score.get_rect(center = (self.size[0]//2, 400 ))
+    if  montrer_level :
+      score = self.police.render("Score", True , (255,255,255))
+      score_react = score.get_rect(center = (self.size[0]//2, 400 ))
+      self.ecran.blit(score, score_react)
 
     self.ecran.blit(play,play_button_rect)
     self.ecran.blit(exit,exit_button_react)
-    self.ecran.blit(score, score_react)
     pygame.display.flip()
 
     ecran_de_fin = True
@@ -323,7 +324,7 @@ class interface() :
         pygame.quit()
         sys.exit()
 
-      elif score_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0]:
+      elif montrer_level and score_react.collidepoint(mouse_x, mouse_y) and pygame.mouse.get_pressed()[0] :
         self.ecran.fill((0,0,0))
         text = self.police.render("Les  scores",True , (255,255,255))
         text_rect = text.get_rect(center = (self.size[0]//2, 100))
@@ -350,10 +351,6 @@ class interface() :
         
 
   
-  
-        
-
-
 
 class Niveau():
   def __init__(self, inter):
