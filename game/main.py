@@ -70,46 +70,46 @@ def control():
               personnage.déplacement("DROITE", grille)
 
     if pygame.key.get_pressed()[pygame.K_ESCAPE]:
-        inter.ecran_pause()
+      inter.ecran_pause()
     if pygame.mouse.get_pressed()[0] or keys[pygame.K_SPACE]:
-        if personnage.direction == "DROITE" and personnage.joueur[0]<len(grille)-1:
-            if grille[personnage.joueur[1]][personnage.joueur[0]+1] > 10 or grille[personnage.joueur[1]][personnage.joueur[0]+1] == 2 :
-                personnage.casser_pierre(grille)
-                epine_time = 0
-            else:
-              if grille[personnage.joueur[1]][personnage.joueur[0]+1] == 0 and epine_time > 1000:
-                proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
-                projectiles.append(proj)
-                epine_time = 0
+      if personnage.direction == "DROITE" and personnage.joueur[0]<len(grille)-1:
+        if grille[personnage.joueur[1]][personnage.joueur[0]+1] > 10 or grille[personnage.joueur[1]][personnage.joueur[0]+1] == 2 :
+          personnage.casser_pierre(grille)
+          epine_time = 0
+        else:
+          if grille[personnage.joueur[1]][personnage.joueur[0]+1] == 0 and epine_time > 1000:
+            proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
+            projectiles.append(proj)
+            epine_time = 0
 
-        elif personnage.direction == "GAUCHE" and personnage.joueur[0]>0:
-            if grille[personnage.joueur[1]][personnage.joueur[0]-1] > 10 or grille[personnage.joueur[1]][personnage.joueur[0]-1] == 2:
-                personnage.casser_pierre(grille)
-                epine_time = 0
-            else:
-              if grille[personnage.joueur[1]][personnage.joueur[0]-1] == 0 and epine_time > 1000:
-                proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
-                projectiles.append(proj)
-                epine_time = 0
-        elif personnage.direction == "HAUT" and personnage.joueur[1]>0:
-            if grille[personnage.joueur[1]-1][personnage.joueur[0]] > 10 or grille[personnage.joueur[1]-1][personnage.joueur[0]] == 2:
-                personnage.casser_pierre(grille)
-                epine_time = 0
-            else:
-              if grille[personnage.joueur[1]-1][personnage.joueur[0]] == 0  and epine_time > 1000:
-                proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
-                projectiles.append(proj)
-                epine_time = 0
-        elif personnage.direction == "BAS" and personnage.joueur[1]<len(grille)-1:
-            if grille[personnage.joueur[1]+1][personnage.joueur[0]] > 10 or grille[personnage.joueur[1]+1][personnage.joueur[0]] == 2:
-                personnage.casser_pierre(grille)
-                epine_time = 0
+      elif personnage.direction == "GAUCHE" and personnage.joueur[0]>0:
+          if grille[personnage.joueur[1]][personnage.joueur[0]-1] > 10 or grille[personnage.joueur[1]][personnage.joueur[0]-1] == 2:
+            personnage.casser_pierre(grille)
+            epine_time = 0
+          else:
+            if grille[personnage.joueur[1]][personnage.joueur[0]-1] == 0 and epine_time > 1000:
+              proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
+              projectiles.append(proj)
+              epine_time = 0
+      elif personnage.direction == "HAUT" and personnage.joueur[1]>0:
+          if grille[personnage.joueur[1]-1][personnage.joueur[0]] > 10 or grille[personnage.joueur[1]-1][personnage.joueur[0]] == 2:
+            personnage.casser_pierre(grille)
+            epine_time = 0
+          else:
+            if grille[personnage.joueur[1]-1][personnage.joueur[0]] == 0  and epine_time > 1000:
+              proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
+              projectiles.append(proj)
+              epine_time = 0
+      elif personnage.direction == "BAS" and personnage.joueur[1]<len(grille)-1:
+          if grille[personnage.joueur[1]+1][personnage.joueur[0]] > 10 or grille[personnage.joueur[1]+1][personnage.joueur[0]] == 2:
+            personnage.casser_pierre(grille)
+            epine_time = 0
 
-            else:
-              if grille[personnage.joueur[1]+1][personnage.joueur[0]] == 0  and epine_time > 1000:
-                proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
-                projectiles.append(proj)
-                epine_time = 0
+          else:
+            if grille[personnage.joueur[1]+1][personnage.joueur[0]] == 0  and epine_time > 1000:
+              proj = Projectile(personnage.joueur,personnage.direction,grille,serpents)
+              projectiles.append(proj)
+              epine_time = 0
 
 
   else:
