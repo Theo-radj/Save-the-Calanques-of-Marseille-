@@ -122,7 +122,7 @@ class Projectile():
           if self.pos_proj[0]+1 < len(grille)-1 and grille[self.pos_proj[1]][self.pos_proj[0]+1] <2 :
             self.pos_proj[0] += 1
             case = self.sens
-          elif grille[self.pos_proj[1]][self.pos_proj[0]+1] ==3:
+          elif grille[self.pos_proj[1]][self.pos_proj[0]+1] > 20:
             mort = True
             case = 0
             for i in self.S:
@@ -134,7 +134,7 @@ class Projectile():
           if self.pos_proj[0] > 0  and grille[self.pos_proj[1]][self.pos_proj[0]-1] <2:
             self.pos_proj[0] -= 1
             case = self.sens
-          elif grille[self.pos_proj[1]][self.pos_proj[0]-1] ==3:
+          elif grille[self.pos_proj[1]][self.pos_proj[0]-1] > 20:
             mort = True
             case = 0
             for i in self.S:
@@ -146,7 +146,7 @@ class Projectile():
           if self.pos_proj[1]+1 < len(grille)-1 and grille[self.pos_proj[1]+1][self.pos_proj[0]] <2:
             self.pos_proj[1] += 1
             case = self.sens
-          elif grille[self.pos_proj[1]+1][self.pos_proj[0]] ==3:
+          elif grille[self.pos_proj[1]+1][self.pos_proj[0]] > 20:
             mort = True
             case = 0
             for i in self.S:
@@ -158,7 +158,7 @@ class Projectile():
           if self.pos_proj[1] > 0 and grille[self.pos_proj[1]-1][self.pos_proj[0]] <2:
             self.pos_proj[1] -= 1
             case = self.sens
-          elif grille[self.pos_proj[1]-1][self.pos_proj[0]] ==3:
+          elif grille[self.pos_proj[1]-1][self.pos_proj[0]] > 20:
             mort = True
             case = 0
             for i in self.S:

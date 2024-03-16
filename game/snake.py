@@ -108,7 +108,6 @@ class Snake() :
         touche = True
 
     if touche == True:
-
       if len(self.position)> 4:
         for i in range(2):
           map[self.position[-1][1]][self.position[-1][0]] = 0

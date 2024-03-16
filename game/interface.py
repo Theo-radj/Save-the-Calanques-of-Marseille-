@@ -99,7 +99,7 @@ class interface() :
         elif affiche == 2 :
           self.dessine_sac_poubelle(x,y)
 
-        elif affiche >= 4 and affiche<=7:
+        elif affiche >= 4 and affiche <= 7:
           self.dessine_proj(x,y,affiche)
     self.affiche_score(sacs)
     pygame.display.flip()
@@ -199,7 +199,7 @@ class interface() :
 
   def dessine_rocher(self, x,y, X,Y):
     if Y < len(self.grille)-1:
-      if self.grille[Y+1][X]>10 and self.grille[Y+1][X]<=20 :
+      if self.grille[Y+1][X]>10 and self.grille[Y+1][X] <= 20 :
         self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
       else:
         self.ecran.blit( self.rock,(x*self.taille_tiles,y*self.taille_tiles))
@@ -249,7 +249,7 @@ class interface() :
       self.ecran.blit(texte1,(texte1.get_rect(center = (pos1, 150 ))))
       pygame.display.flip()
       if animation:
-        pause = random.randint(20,300)
+        pause = random.randint(20,200)
         pygame.time.wait(pause)
       pos1 += 40
       
@@ -261,18 +261,20 @@ class interface() :
       self.ecran.blit(texte2,(texte2.get_rect(center = (pos2, 200 ))))
       pygame.display.flip()
       if animation :
-        pause = random.randint(20,300)
+        pause = random.randint(20,200)
         pygame.time.wait(pause)
       pos2 += 40
 
     self.ecran_tempo(True)
 
-  def verif_echap_espace(self,animation):
+  def verif_echap_espace(self, animation):
     for event in pygame.event.get():
-      if event.type == pygame.KEYDOWN:
-        animation = False
-        break
-    return animation
+      if pygame.mouse.get_pressed()[0] :
+        return False
+    if animation == True :
+      return True
+    else :
+      return False
 
 
   def ecran_pause(self):
