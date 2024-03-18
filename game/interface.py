@@ -246,7 +246,7 @@ class interface() :
       self.interface_ferme()
       animation = self.verif_echap_espace(animation)
       texte1 = self.police.render(i, True , (255,255,255))
-      self.ecran.blit(texte1,(texte1.get_rect(center = (pos1, 150 ))))
+      self.ecran.blit(texte1,(texte1.get_rect(center = (pos1, 130 ))))
       pygame.display.flip()
       if animation:
         pause = random.randint(20,200)
@@ -258,7 +258,7 @@ class interface() :
       self.interface_ferme()
       animation = self.verif_echap_espace(animation)
       texte2 = self.police.render(i,True , (255,255,255))
-      self.ecran.blit(texte2,(texte2.get_rect(center = (pos2, 200 ))))
+      self.ecran.blit(texte2,(texte2.get_rect(center = (pos2, 180 ))))
       pygame.display.flip()
       if animation :
         pause = random.randint(20,200)
@@ -292,7 +292,7 @@ class interface() :
 
 
   def ecran_tempo(self,montrer_level = False):
-    play = pygame.transform.scale(self.play_button.convert_alpha(), (225,75))
+    play = pygame.transform.scale(self.play_button.convert_alpha(), (260,100))
     exit = pygame.transform.scale(self.exit_button.convert_alpha(), (225,75))
     
     play_button_rect = play.get_rect(center = (self.size[0]//2, 300))
