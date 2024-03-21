@@ -293,7 +293,7 @@ class interface() :
 
   def ecran_tempo(self,montrer_level = False):
     play = pygame.transform.scale(self.play_button.convert_alpha(), (260,100))
-    exit = pygame.transform.scale(self.exit_button.convert_alpha(), (225,75))
+    exit = pygame.transform.scale(self.exit_button.convert_alpha(), (280,120))
     
     play_button_rect = play.get_rect(center = (self.size[0]//2, 300))
     exit_button_react = exit.get_rect(center = (self.size[0]//2, 500 ))
