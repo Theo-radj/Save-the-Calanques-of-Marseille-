@@ -1,4 +1,4 @@
-# PROJET DES TROPHÉES NSI 2023: The Fish
+# TROPHÉES NSI 2023: The Fish
 
 ## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
 <h1 align="center">
