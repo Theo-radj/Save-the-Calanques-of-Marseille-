@@ -28,7 +28,7 @@ Python
 ---
 ### Requirements
 
-Librairie externe requise:
+Librairie externe requise pour la première méthode:
 
 - Pygame
 
