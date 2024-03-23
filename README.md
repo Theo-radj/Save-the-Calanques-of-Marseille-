@@ -1,4 +1,4 @@
-# TROPHÉES NSI 2023: The Fish
+# TROPHÉES NSI 2023: Save the Calanques of Marseille 
 
 ## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
 
@@ -13,7 +13,7 @@
 ---
 ### Introduction: 
 
-Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
+Ce projet est un jeux vidéo engagé dont le but est de dépolluer les calanques de Marseille tout en contrôlant un petit poisson. Celui-ci étant constamment pourchassé par une murène, une espèce invasive. Pour se défendre il est capable de lancer des épines et de casser des obstacles. Le jeu comporte trois niveaux de difficulté modifiant le nombre et la vitesse des murènes. Un score est calculé et sauvegardé à chaque partie prenant en compte le temps qu’a mis le joueur pour ramasser les ordures et leur nombre. 
 
 ---
 ### Fonctionnalités:
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 
 #### Seconde méthode :
-Télechargez directement le jeu [The Fish](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **The Fish.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
+Télechargez directement le jeu [Save the Calanques of Marseille ](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
