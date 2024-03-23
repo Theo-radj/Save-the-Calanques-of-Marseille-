@@ -42,8 +42,8 @@ pip install -r requirements.txt
 ---
 ### Comment l'utiliser :
 #### Premiere méthode :
-- télécharger notre projet en fichier zip
-- décompresser-le
+- téléchargez notre projet en fichier zip 
+- décompressez-le
 - lancez notre jeu avec le fichier main.py
 
 
