@@ -17,9 +17,9 @@ Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à 
 
 ---
 ### Fonctionnalités:
-- Les quatres fleches directionelles ou les touches zqsd pour controler le poisson
-- La touche espace ou le clic droit de la souris pour lancer une épine pour se proteger des murènes ou casser des murs ou rammasser des sacs poubelles
-- La touche échap pour mettre en pause
+- Utilisation des quatre flèches directionnelles ou des touches zqsd pour contrôler le poisson.
+- Utilisation de la touche espace ou du clic droit de la souris pour lancer une épine afin de se protéger des murènes, casser des murs ou ramasser des sacs poubelles.
+- Utilisation de la touche Échap pour mettre en pause le jeu.
 ---
 
 ### Language utilisé:
