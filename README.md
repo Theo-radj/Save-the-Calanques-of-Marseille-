@@ -1,6 +1,7 @@
 # TROPHÉES NSI 2023: The Fish
 
 ## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
+
 <h1 align="center">
   <br>
   <a href="https://www.stjomadeleine.org/fr/"><img src="https://www.stjomadeleine.org/_2/images/logo-small.png" alt="St Joeph de la Madeleine" width="150"></a>
@@ -11,6 +12,7 @@
 
 ---
 ### Introduction: 
+
 Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
 
 ---
@@ -28,13 +30,18 @@ Python
 
 Librairie externe requise:
 
-- Pyagme
+- Pygame
+
 ---
 ### Comment l'utiliser :
 #### Premiere méthode :
 - télécharger notre projet en fichier zip
 - décompresser-le
-- 
+- lancez notre jeu avec le fichier main.py
+
+
+#### Seconde méthode :
+Télecharger directement le jeu [The Fish](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Vous dézipez le dossier et lancez **The Fish.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
