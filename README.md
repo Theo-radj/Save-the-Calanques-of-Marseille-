@@ -41,7 +41,7 @@ Librairie externe requise:
 
 
 #### Seconde méthode :
-Télecharger directement le jeu [The Fish](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Vous dézipez le dossier et lancez **The Fish.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
+Télechargez directement le jeu [The Fish](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **The Fish.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
