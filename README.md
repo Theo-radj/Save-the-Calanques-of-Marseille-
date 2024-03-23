@@ -6,10 +6,8 @@
   <a href="https://www.stjomadeleine.org/fr/"><img src="https://www.stjomadeleine.org/_2/images/logo-small.png" alt="St Joeph de la Madeleine" width="150"></a>
   <br>
   <b>St Joeph de la Madeleine</b>
-  <br>
-  <sub><sup><b>(REE-YOU-JINX)</b></sup></sub>
-  <br>
 </h1>
+
 ### Introduction: 
 Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
 
