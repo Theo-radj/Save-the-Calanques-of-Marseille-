@@ -1,3 +1,45 @@
-# stjomad-game
-# Introduction: 
-This is a simple text based adventure game. The purpose of this game is for you, the player, to navigate through different environments and interact with various objects
+# PROJET DES TROPHÉES NSI 2023: The Fish
+
+## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
+
+### Introduction: 
+Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
+
+---
+### Fonctionnalités:
+- Les quatres fleches directionelles ou les touches zqsd pour controler le poisson
+- La touche espace ou le clic droit de la souris pour lancer une épine pour se proteger des murènes ou casser des murs ou rammasser des sacs poubelles
+- La touche échap pour mettre en pause
+---
+
+### Language utilisé:
+Python
+
+---
+### Requirements
+
+Librairie externe requise:
+
+- Pyagme
+---
+### Comment l'utiliser :
+#### Premiere méthode :
+- télécharger notre projet en fichier zip
+- décompresser-le
+- 
+
+
+
+---
+### Contributions :
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue pour signaler des bogues ou proposer des améliorations.
+
+---
+### Auteurs :
+- RADJOU Dinesh
+- DELAROQUE Joel
+
+---
+### License :
+- Le code source de ce projet est sous licence GNU General Public License version 3 ou ultérieure (GPL v3+). Voir le fichier LICENSE.txt pour plus de détails.
+- Le contenu textuel de ce projet est sous licence Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). Voir le fichier LICENSE.txt pour plus de détails.
