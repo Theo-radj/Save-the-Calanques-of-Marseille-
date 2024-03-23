@@ -31,6 +31,13 @@ Python
 Librairie externe requise pour la première méthode:
 
 - Pygame
+```bash
+pip install pygame
+```
+ou sinon
+```bash
+pip install -r requirements.txt
+```
 
 ---
 ### Comment l'utiliser :
