@@ -8,6 +8,8 @@
   <b>St Joeph de la Madeleine</b>
 </h1>
 
+
+---
 ### Introduction: 
 Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
 
