@@ -3,10 +3,14 @@ from hero import *
 from interface import *
 from snake import *
 from map import *
-
+son = pygame.mixer.Sound('asset/underwater theme(8-bit).mp3')
+son.set_volume(0.2)
+dead =  pygame.mixer.Sound('asset/dead.mp3')
 
 #FONCTION
 def run_game() :
+  son.stop()
+  son.play(loops=-1,maxtime=0,fade_ms=0)
   while inter.jeu :
     inter.interface_ferme()
     inter.analyse_grille(nombre_de_sacs)
@@ -109,8 +113,14 @@ def control():
 
 
   else:
+    son.stop()
+    dead.play(loops=0,maxtime=0,fade_ms=0) 
+    pygame.time.wait(1500)
     inter.fin_de_jeu()
 
+
+
+     
 
   compteur = compteur + 1
   if (compteur%vitesse_serpent) == 0:

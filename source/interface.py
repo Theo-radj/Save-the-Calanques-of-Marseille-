@@ -4,15 +4,14 @@ import sys
 import random
 
 
-
 class interface() :
   def __init__(self, grille, personnage, screen_size=(720,720)) :
-    # générer la fenêtre de notre jeux
+    # générer la fenêtre de notre jeu
     self.size = screen_size
     self.jeu = True
-    pygame.display.set_caption("Anger Snake")
+    pygame.display.set_caption("Save the Calanques of Marseille")
 
-    self.icon = pygame.image.load("asset/logo.jpeg")
+    self.icon = pygame.image.load("asset/logo.jpg")
     pygame.display.set_icon(self.icon)
 
     self.tiles_size_fond = 256
@@ -28,9 +27,17 @@ class interface() :
     self.taille_tiles = 36
     self.rock= pygame.image.load("asset/rocks0.png")
     self.rock = pygame.transform.scale(self.rock, (self.taille_tiles,self.taille_tiles))
-
+    self.rock01= pygame.image.load("asset/rocks01.png")
+    self.rock01 = pygame.transform.scale(self.rock01, (self.taille_tiles,self.taille_tiles))
+    self.rock02= pygame.image.load("asset/rocks02.png")
+    self.rock02= pygame.transform.scale(self.rock02, (self.taille_tiles,self.taille_tiles))
     self.rock2 = pygame.image.load("asset/rocks1.png")
     self.rock2 = pygame.transform.scale(self.rock2, (self.taille_tiles,self.taille_tiles))
+    self.rock11= pygame.image.load("asset/rocks11.png")
+    self.rock11 = pygame.transform.scale(self.rock11, (self.taille_tiles,self.taille_tiles))
+    self.rock12= pygame.image.load("asset/rocks12.png")
+    self.rock12 = pygame.transform.scale(self.rock12, (self.taille_tiles,self.taille_tiles))
+
 
     self.epine = pygame.image.load("asset/epine.png")
     self.epine = pygame.transform.scale(self.epine, (self.taille_tiles,self.taille_tiles))
@@ -88,7 +95,7 @@ class interface() :
         affiche = self.grille[i][j]
 
         if affiche <= 20 and affiche >= 10 :
-          self.dessine_rocher(x,y, j,i)
+          self.dessine_rocher(x,y, j,i,affiche)
 
         elif affiche == 1:
           self.dessine_perso(x,y)
@@ -197,14 +204,29 @@ class interface() :
     elif sens == 7:
       self.ecran.blit( pygame.transform.rotate(self.epine, 90),(x*self.taille_tiles,y*self.taille_tiles))
 
-  def dessine_rocher(self, x,y, X,Y):
+  def dessine_rocher(self, x,y, X,Y,value):
     if Y < len(self.grille)-1:
       if self.grille[Y+1][X]>10 and self.grille[Y+1][X] <= 20 :
-        self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+        if value == 20:
+          self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+        elif value < 20 and value>13:
+          self.ecran.blit( self.rock11,(x*self.taille_tiles,y*self.taille_tiles))
+        else:
+          self.ecran.blit( self.rock12,(x*self.taille_tiles,y*self.taille_tiles))
       else:
-        self.ecran.blit( self.rock,(x*self.taille_tiles,y*self.taille_tiles))
+        if value == 20:
+          self.ecran.blit( self.rock,(x*self.taille_tiles,y*self.taille_tiles))
+        elif value < 20 and value>13:
+          self.ecran.blit( self.rock01,(x*self.taille_tiles,y*self.taille_tiles))
+        else:
+          self.ecran.blit( self.rock02,(x*self.taille_tiles,y*self.taille_tiles))
     else:
-      self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+      if value == 20:
+        self.ecran.blit( self.rock2,(x*self.taille_tiles,y*self.taille_tiles))
+      elif value < 20 and value>13:      
+        self.ecran.blit( self.rock11,(x*self.taille_tiles,y*self.taille_tiles))
+      else:
+        self.ecran.blit( self.rock12,(x*self.taille_tiles,y*self.taille_tiles))
 
   def dessine_sac_poubelle(self, x,y):
     self.ecran.blit(self.poubelle,(x*self.taille_tiles,y*self.taille_tiles))
@@ -253,8 +275,8 @@ class interface() :
         pygame.time.wait(pause)
       pos1 += 40
       
-    pos2 = self.size[0]//2 - 280
-    for i in "dans notre jeux" :
+    pos2 = self.size[0]//2 - 270
+    for i in "dans notre jeu" :
       self.interface_ferme()
       animation = self.verif_echap_espace(animation)
       texte2 = self.police.render(i,True , (255,255,255))

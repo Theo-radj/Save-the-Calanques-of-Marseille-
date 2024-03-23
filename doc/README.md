@@ -1,4 +1,4 @@
-# TROPHÉES NSI 2023: The Fish
+# TROPHÉES NSI 2023: Save the Calanques of Marseille 
 
 ## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
 
@@ -13,13 +13,13 @@
 ---
 ### Introduction: 
 
-Ce projet vise à créer un jeu simple où l'utilisateur controle un poisson à la recherche des sacs poubelles et en évitant les murènes. 
+Ce projet est un jeux vidéo engagé dont le but est de dépolluer les calanques de Marseille tout en contrôlant un petit poisson. Celui-ci étant constamment pourchassé par une murène, une espèce invasive. Pour se défendre il est capable de lancer des épines et de casser des obstacles. Le jeu comporte trois niveaux de difficulté modifiant le nombre et la vitesse des murènes. Un score est calculé et sauvegardé à chaque partie prenant en compte le temps qu’a mis le joueur pour ramasser les ordures et leur nombre. 
 
 ---
 ### Fonctionnalités:
-- Les quatres fleches directionelles ou les touches zqsd pour controler le poisson
-- La touche espace ou le clic droit de la souris pour lancer une épine pour se proteger des murènes ou casser des murs ou rammasser des sacs poubelles
-- La touche échap pour mettre en pause
+- Utilisation des quatre flèches directionnelles ou des touches zqsd pour contrôler le poisson.
+- Utilisation de la touche espace ou du clic droit de la souris pour lancer une épine afin de se protéger des murènes, casser des murs ou ramasser des sacs poubelles.
+- Utilisation de la touche Échap pour mettre en pause le jeu.
 ---
 
 ### Language utilisé:
@@ -31,17 +31,24 @@ Python
 Librairie externe requise pour la première méthode:
 
 - Pygame
+```bash
+pip install pygame
+```
+ou sinon
+```bash
+pip install -r requirements.txt
+```
 
 ---
 ### Comment l'utiliser :
 #### Premiere méthode :
-- télécharger notre projet en fichier zip
-- décompresser-le
+- téléchargez notre projet en fichier zip 
+- décompressez-le
 - lancez notre jeu avec le fichier main.py
 
 
 #### Seconde méthode :
-Télechargez directement le jeu [The Fish](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **The Fish.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
+Télechargez directement le jeu [Save the Calanques of Marseille ](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
