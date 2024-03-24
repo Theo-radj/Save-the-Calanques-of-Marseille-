@@ -43,13 +43,13 @@ pip install -r requirements.txt
 ### Comment l'utiliser :
 #### Premiere méthode :
 
-Une fois téléchargé notre projet (soit en le cloner soit en le téléchargeant en .zip), dans le terminal du projet, executez la commande pour installer les dépendances:
+Une fois téléchargé notre projet (soit en le cloner soit en le téléchargeant en .zip), dans le terminal du projet à la racine du dossier, executez la commande pour installer les dépendances:
 ```bash
 pip install -r doc/requirements.txt
 ```
 Puis lancez notre projet avec la commande :
 ```bash
-python main.py
+python source/main.py
 ```
 
 
