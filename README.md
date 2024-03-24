@@ -42,10 +42,15 @@ pip install -r requirements.txt
 ---
 ### Comment l'utiliser :
 #### Premiere méthode :
-- téléchargez notre projet en fichier zip 
-- décompressez-le
-- téléchargez le module pygame si vous n'avez pas encore fait
-- lancez notre jeu avec le fichier main.py
+
+Une fois téléchargé notre projet (soit en le cloner soit en le téléchargeant en .zip), dans le terminal du projet, executez la commande pour installer les dépendances:
+```bash
+pip install -r doc/requirements.txt
+```
+Puis lancez notre projet avec la commande :
+```bash
+python main.py
+```
 
 
 #### Seconde méthode :
