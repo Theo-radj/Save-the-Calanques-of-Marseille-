@@ -49,7 +49,8 @@ pip install -r doc/requirements.txt
 ```
 Puis lancez notre projet avec la commande :
 ```bash
-python source/main.py
+cd source
+python main.py
 ```
 
 
