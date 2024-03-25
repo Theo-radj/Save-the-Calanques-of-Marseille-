@@ -69,6 +69,13 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue pour 
 - DELAROQUE Joel
 
 ---
+### Credits :
+Toutes les images utilisées dans le jeu ont été créer par nous même avec [Piskel](https://www.piskelapp.com/) sauf pour le fond d'écran water utilisé du site [opengamear](https://opengameart.org/content/animated-water-texture-128px) avec une licence CC0 1.0 DEED.
+Le font utilisé est issu du site [Font Meme](https://fontmeme.com/fonts/arcade-classic-pizzadude-font/) avec une utilisation gratuite pour usage commercial et personnel.
+La musique utilisé provient de [Youtube](https://www.youtube.com/watch?v=A8m39AUmZBA&ab_channel=cookieenchanter).
+Le son "dead" lorsque le personnage meurt provient du site [Pixabay](https://pixabay.com/sound-effects/negative-beeps-6008/) avec une [licence Pixabay](https://pixabay.com/service/license-summary/).
+
+---
 ### License :
 - Le code source de ce projet est sous licence GNU General Public License version 3 ou ultérieure (GPL v3+). Voir le fichier LICENSE.txt pour plus de détails.
 - Le contenu textuel de ce projet est sous licence Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). Voir le fichier LICENSE.txt pour plus de détails.
