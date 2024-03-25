@@ -26,7 +26,7 @@ Ce projet est un jeux vidéo engagé dont le but est de dépolluer les calanques
 Python
 
 ---
-### Requirements
+### Requirement
 
 Librairie externe requise pour la première méthode:
 
@@ -42,13 +42,20 @@ pip install -r requirements.txt
 ---
 ### Comment l'utiliser :
 #### Premiere méthode :
-- téléchargez notre projet en fichier zip 
-- décompressez-le
-- lancez notre jeu avec le fichier main.py
+
+Une fois téléchargé notre projet (soit en le cloner soit en le téléchargeant en .zip), dans le terminal du projet à la racine du dossier, executez la commande pour installer les dépendances:
+```bash
+pip install -r doc/requirements.txt
+```
+Puis lancez notre projet avec la commande :
+```bash
+cd source
+python main.py
+```
 
 
 #### Seconde méthode :
-Télechargez directement le jeu [Save the Calanques of Marseille ](https://github.com/Theo-radj/stjomad-game/releases/download/python/The.Fish.zip) en exécutable. Décrompressez le dossier et lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
+Télechargez directement le jeu [Save the Calanques of Marseille ](https://github.com/Theo-radj/stjomad-game/releases/download/python/Save.the.Calanques.of.Marseille.zip) en exécutable. Décrompressez le dossier et lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
