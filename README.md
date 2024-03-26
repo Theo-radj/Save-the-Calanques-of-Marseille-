@@ -4,6 +4,7 @@
 
 <h1 align="center">
   <a href="https://www.stjomadeleine.org/fr/"><img src="https://www.stjomadeleine.org/_2/images/logo-small.png" alt="St Joeph de la Madeleine" width="150"></a>
+  <br>
   <b>St Joeph de la Madeleine</b>
 </h1>
 
