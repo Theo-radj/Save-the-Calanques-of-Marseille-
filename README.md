@@ -3,9 +3,7 @@
 ## Projet de Joel et Dinesh de l'établissement St-Joseph de la madeleine 
 
 <h1 align="center">
-  <br>
   <a href="https://www.stjomadeleine.org/fr/"><img src="https://www.stjomadeleine.org/_2/images/logo-small.png" alt="St Joeph de la Madeleine" width="150"></a>
-  <br>
   <b>St Joeph de la Madeleine</b>
 </h1>
 
