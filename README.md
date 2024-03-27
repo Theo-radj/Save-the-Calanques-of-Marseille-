@@ -54,7 +54,7 @@ python main.py
 
 
 #### Seconde méthode :
-Télechargez directement le jeu [Save the Calanques of Marseille ](https://github.com/Theo-radj/stjomad-game/releases/download/python/Save.the.Calanques.of.Marseille.zip) en exécutable. Décrompressez le dossier et lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
+Télechargez directement notre projet en .zip . Décrompressez le dossier et dans le dossier "version exécutable", lancez **Save the Calanques of Marseille.exe**. Vous n'aurez pas besoin de pygame ou python avec cette méthode.
 
 
 
