@@ -77,4 +77,4 @@ Le son "dead" lorsque le personnage meurt provient du site [Pixabay](https://pix
 ---
 ### License :
 - Le code source de ce projet est sous licence GNU General Public License version 3 ou ultérieure (GPL v3+). Voir le fichier LICENSE.txt pour plus de détails.
-- Le contenu textuel de ce projet est sous licence Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0). Voir le fichier LICENSE.txt pour plus de détails.
+- Le contenu textuel de ce projet est sous licence Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
